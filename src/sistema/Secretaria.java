@@ -52,7 +52,7 @@ public class Secretaria extends usuario.Usuario {
         return paciente;
     }
     public void cadastrarConsulta(Consulta cons){
-        GenericDAO<Consulta> dao = new GenericDAO();
+        GenericDAO dao = new GenericDAO();
         dao.salvar(cons);
     }
 //    public Paciente consultarUmPaciente(Paciente paciente){

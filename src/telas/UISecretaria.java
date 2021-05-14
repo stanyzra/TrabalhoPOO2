@@ -1968,6 +1968,7 @@ public class UISecretaria extends javax.swing.JFrame {
         System.out.println("antes: "+novaCons.getPaciente().isConsultaCadastrada());
         novaCons.getPaciente().setConsultaCadastrada(true);
         System.out.println("depois : "+novaCons.getPaciente().isConsultaCadastrada());
+        
         pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
         
         sec.cadastrarConsulta(novaCons);
