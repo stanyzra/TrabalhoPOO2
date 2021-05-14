@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2021-05-13T00:54:06", comments="EclipseLink-2.7.7.v20200504-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2021-05-14T07:52:36", comments="EclipseLink-2.7.7.v20200504-rNA")
 @StaticMetamodel(Paciente.class)
 public class Paciente_ { 
 
@@ -23,7 +23,7 @@ public class Paciente_ {
     public static volatile SingularAttribute<Paciente, Boolean> consultaCadastrada;
     public static volatile SingularAttribute<Paciente, LocalDate> localDateNasc;
     public static volatile SingularAttribute<Paciente, DadosAdicionais> dadosAdicionais;
-    public static volatile SingularAttribute<Paciente, Integer> Id;
+    public static volatile SingularAttribute<Paciente, Integer> id;
     public static volatile SingularAttribute<Paciente, Consulta> consulta;
     public static volatile SingularAttribute<Paciente, String> rua;
 

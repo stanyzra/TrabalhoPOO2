@@ -143,7 +143,6 @@ public class Trabalho2 extends javax.swing.JFrame {
          */
         try {
             FlatLightLaf.install();
-            System.out.println(Arrays.toString(javax.swing.UIManager.getInstalledLookAndFeels()));
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Flatlaf Dark".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
