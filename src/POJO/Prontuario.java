@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
  * @author aleix
  */
 @Entity
+@SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize=1)
+
 public class Prontuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

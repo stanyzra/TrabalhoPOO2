@@ -5,7 +5,7 @@
  */
 package usuario;
 
-import java.util.ArrayList;
+import POJO.Paciente;
 
 public class Usuario {
 
@@ -17,15 +17,15 @@ public class Usuario {
         
     }
 
-    public void cadastrarPaciente(ArrayList dados){
+    public void cadastrarPaciente(Paciente pac){
         
     }
     
-    public void atualizarPaciente(ArrayList dados){
+    public void atualizarPaciente(Paciente pac){
         
     }
     
-    public void removerPaciente(){
+    public void removerPaciente(Paciente pac){
         
     }
     

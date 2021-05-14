@@ -36,6 +36,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.PlainDocument;
 import sistema.Secretaria;
 /**
  *
@@ -185,6 +188,8 @@ public class UISecretaria extends javax.swing.JFrame {
         horarioField = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         painelPacCons = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        pacientesBoxCons = new javax.swing.JComboBox();
         painelMedico = new javax.swing.JPanel();
         medicoField = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -529,6 +534,7 @@ public class UISecretaria extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Selecione o paciente");
 
+        pacientesBox.setEditable(true);
         pacientesBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pacientesBoxActionPerformed(evt);
@@ -543,7 +549,7 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pacientesBox, 0, 113, Short.MAX_VALUE)
+                .addComponent(pacientesBox, 0, 1, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelSelecionarPacienteLayout.setVerticalGroup(
@@ -553,7 +559,7 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addGroup(painelSelecionarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(pacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelAtualizaCidade.setBackground(new java.awt.Color(51, 51, 51));
@@ -644,7 +650,7 @@ public class UISecretaria extends javax.swing.JFrame {
             .addGroup(painelAtualizaNomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelAtualizaNomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atualizaNomeField)
+                    .addComponent(atualizaNomeField, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                     .addGroup(painelAtualizaNomeLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -657,7 +663,7 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(atualizaNomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         painelAtualizaRua.setBackground(new java.awt.Color(51, 51, 51));
@@ -844,48 +850,44 @@ public class UISecretaria extends javax.swing.JFrame {
         atualizarPaciente.setLayout(atualizarPacienteLayout);
         atualizarPacienteLayout.setHorizontalGroup(
             atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, atualizarPacienteLayout.createSequentialGroup()
-                        .addComponent(painelSelecionarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(356, 356, 356))
-                    .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                        .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(painelAtualizaConvenio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(painelAtualizaRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(painelAtualizaCidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(painelAtualizaNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(52, 52, 52)
-                        .addComponent(filler7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, atualizarPacienteLayout.createSequentialGroup()
-                                .addComponent(painelAtualizaTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27))
-                            .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                                .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(painelAtualizaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(painelAtualizaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, atualizarPacienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(atualizarPacienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(painelSelecionarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelAtualizaConvenio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelAtualizaRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelAtualizaCidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelAtualizaNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(filler7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(atualizarPacienteLayout.createSequentialGroup()
+                        .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(painelAtualizaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(painelAtualizaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, atualizarPacienteLayout.createSequentialGroup()
+                        .addComponent(painelAtualizaTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
         );
         atualizarPacienteLayout.setVerticalGroup(
             atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(painelSelecionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addComponent(painelSelecionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
                         .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(painelAtualizaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(painelAtualizaTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(atualizarPacienteLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(102, 102, 102)
                         .addComponent(filler7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(atualizarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -897,7 +899,7 @@ public class UISecretaria extends javax.swing.JFrame {
                     .addComponent(painelAtualizaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(painelAtualizaConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1394,7 +1396,7 @@ public class UISecretaria extends javax.swing.JFrame {
             .addGroup(painelHorarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(horarioField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(horarioField, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                     .addGroup(painelHorarioLayout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1412,15 +1414,38 @@ public class UISecretaria extends javax.swing.JFrame {
 
         painelPacCons.setBackground(new java.awt.Color(51, 51, 51));
 
+        jLabel21.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel21.setText("Selecione o paciente");
+
+        pacientesBoxCons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pacientesBoxConsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelPacConsLayout = new javax.swing.GroupLayout(painelPacCons);
         painelPacCons.setLayout(painelPacConsLayout);
         painelPacConsLayout.setHorizontalGroup(
             painelPacConsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGroup(painelPacConsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelPacConsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pacientesBoxCons, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(painelPacConsLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 125, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         painelPacConsLayout.setVerticalGroup(
             painelPacConsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGroup(painelPacConsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pacientesBoxCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         painelMedico.setBackground(new java.awt.Color(51, 51, 51));
@@ -1527,7 +1552,7 @@ public class UISecretaria extends javax.swing.JFrame {
                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelTipoConsLayout.createSequentialGroup()
                         .addComponent(radioNormal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                         .addComponent(radioRetorno)))
                 .addContainerGap())
         );
@@ -1585,20 +1610,22 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastrarConsultaLayout.createSequentialGroup()
+                        .addComponent(painelTipoCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(cadastrarConsultaLayout.createSequentialGroup()
                         .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarConsultaLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(filler9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(48, 48, 48))
-                                .addGroup(cadastrarConsultaLayout.createSequentialGroup()
-                                    .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(filler12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(painelPacCons, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarConsultaLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(filler9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48))
+                            .addGroup(cadastrarConsultaLayout.createSequentialGroup()
+                                .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(filler12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(painelPacCons, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 77, Short.MAX_VALUE))
                             .addGroup(cadastrarConsultaLayout.createSequentialGroup()
                                 .addComponent(painelHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(painelDataCons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(filler10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1609,10 +1636,7 @@ public class UISecretaria extends javax.swing.JFrame {
                             .addComponent(painelMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(cadastrarConsultaLayout.createSequentialGroup()
                                 .addGap(116, 116, 116)
-                                .addComponent(filler8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(cadastrarConsultaLayout.createSequentialGroup()
-                        .addComponent(painelTipoCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(filler8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         cadastrarConsultaLayout.setVerticalGroup(
@@ -1631,7 +1655,7 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(cadastrarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastrarConsultaLayout.createSequentialGroup()
-                        .addGap(0, 160, Short.MAX_VALUE)
+                        .addGap(0, 166, Short.MAX_VALUE)
                         .addComponent(filler9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filler11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1641,7 +1665,7 @@ public class UISecretaria extends javax.swing.JFrame {
                         .addComponent(filler8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filler12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                         .addComponent(painelSalvarCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -1689,23 +1713,26 @@ public class UISecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarSecvoltarMenuPrincipal
 
     
-    public void atualizarComboBoxAlteracao(String tela){
+    public void atualizarComboBoxPacientes(JComboBox comboBox, String tela){
         limparCampos(getContentPane());
         pacientes = sec.consultarPaciente();
         if (pacientes.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Atualizar Paciente", JOptionPane.WARNING_MESSAGE);
         }else{
-            pacientesBox.removeAllItems();
+            comboBox.removeAllItems();
             opcoesSec.show(cardOpcoesSecretaria, tela);
+            
             pacientes.forEach(itens -> {
-                pacientesBox.addItem(itens.getNome());
+                comboBox.addItem(itens.getNome());
 
-            });         
+            });     
+            atualizarCamposAlteracao();
         }
     }
     
     private void botaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarActionPerformed
-        atualizarComboBoxAlteracao("atualizarPaciente");
+        atualizarComboBoxPacientes(pacientesBox,"atualizarPaciente");
+        
     }//GEN-LAST:event_botaoAtualizarActionPerformed
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
@@ -1737,22 +1764,20 @@ public class UISecretaria extends javax.swing.JFrame {
 
         Calendar dataSelecionada = dataNascCalendar.getCalendar();
         
-        ArrayList dadosInformados = new ArrayList();        
-
-        dadosInformados.add(nomeField.getText());
-        dadosInformados.add(telField.getText());
-        dadosInformados.add(bairroField.getText());
-        dadosInformados.add(cidadeField.getText());
-        dadosInformados.add(ruaField.getText());
-        dadosInformados.add(grupoConvenio.getSelection().getActionCommand());
-        dadosInformados.add(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
+        Paciente pacienteNovo = new Paciente();
+        
+        pacienteNovo.setNome(nomeField.getText());
+        pacienteNovo.setBairro(bairroField.getText());
+        pacienteNovo.setCidade(cidadeField.getText());
+        pacienteNovo.setRua(ruaField.getText());
+        pacienteNovo.setTelefone(Integer.parseInt(telField.getText()));
+        pacienteNovo.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
                 (dataSelecionada.get(Calendar.MONTH)+1),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-        
-        sec.cadastrarPaciente(dadosInformados);
-        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
-        modelAtualizarConvenio = grupoConvenio.getSelection();
-        
+        pacienteNovo.setTipoPlano(grupoConvenio.getSelection().getActionCommand());
+
+        sec.cadastrarPaciente(pacienteNovo);
+        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");        
         limparCampos(getContentPane());
         
     }//GEN-LAST:event_botaoSalvarDadosActionPerformed
@@ -1800,28 +1825,30 @@ public class UISecretaria extends javax.swing.JFrame {
         
         Calendar dataSelecionada = atualizaDataNascCalendar.getCalendar();
         
-        ArrayList dadosAtualizados = new ArrayList();        
+        Paciente dadosAtualizados = new Paciente();        
 
-        dadosAtualizados.add(atualizaNomeField.getText());
-        dadosAtualizados.add(atualizaTelField.getText());
-        dadosAtualizados.add(atualizaBairroField.getText());
-        dadosAtualizados.add(atualizaCidadeField.getText());
-        dadosAtualizados.add(atualizaRuaField.getText());
-        dadosAtualizados.add(grupoAtualizarConvenio.getSelection().getActionCommand());
-        dadosAtualizados.add(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
+        dadosAtualizados.setNome(atualizaNomeField.getText());
+        dadosAtualizados.setTelefone(Integer.parseInt(atualizaTelField.getText()));
+        dadosAtualizados.setBairro(atualizaBairroField.getText());
+        dadosAtualizados.setCidade(atualizaCidadeField.getText());
+        dadosAtualizados.setRua(atualizaRuaField.getText());
+        dadosAtualizados.setTipoPlano(grupoAtualizarConvenio.getSelection().getActionCommand());
+        dadosAtualizados.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
                 (dataSelecionada.get(Calendar.MONTH)),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-        dadosAtualizados.add(pacientes.get(pacientesBox.getSelectedIndex()).getId());
+        dadosAtualizados.setId(pacientes.get(pacientesBox.getSelectedIndex()).getId());
         
         sec.atualizarPaciente(dadosAtualizados);
         JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
-        atualizarComboBoxAlteracao("atualizarPaciente");
+        atualizarComboBoxPacientes(pacientesBox, "atualizarPaciente");
         atualizarCamposAlteracao();
 
     }//GEN-LAST:event_botaoAtualizarDadosActionPerformed
 
     public void atualizarCamposAlteracao(){
+        
         if(pacientesBox.getSelectedIndex() != -1){
+            
             grupoAtualizarConvenio.add(atualizaRadioParticular);
             grupoAtualizarConvenio.add(atualizaRadioPlanodeSaude);
             
@@ -1886,35 +1913,11 @@ public class UISecretaria extends javax.swing.JFrame {
     private void botaoCadastrarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarConsActionPerformed
         // TODO add your handling code here:
         opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
-        atualizarComboBoxAlteracao("cadastrarConsulta");
+        atualizarComboBoxPacientes(pacientesBoxCons,"cadastrarConsulta");
     }//GEN-LAST:event_botaoCadastrarConsActionPerformed
-    
-    public void adicionarPacientesBoxInPanel(JPanel painel){
-        
-        javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
-        painel.setLayout(painelLayout);
-        painelLayout.setHorizontalGroup(
-            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pacientesBox, 0, 113, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        painelLayout.setVerticalGroup(
-            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(pacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-    }
+   
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
         menu.show(cardMenu, "menuGerenciarConsulta");
-        adicionarPacientesBoxInPanel(painelPacCons);
     }//GEN-LAST:event_botaoConsultaActionPerformed
 
     private void radioNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNormalActionPerformed
@@ -1927,7 +1930,16 @@ public class UISecretaria extends javax.swing.JFrame {
 
     private void botaoSalvarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarConsActionPerformed
         // TODO add your handling code here:
+        Consulta novaCons = new Consulta();
+        
+//        System.out.println(pacientesBoxCons.getSelectedIndex());
+        //novaCons.setPaciente();
+        
     }//GEN-LAST:event_botaoSalvarConsActionPerformed
+
+    private void pacientesBoxConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxConsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pacientesBoxConsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2033,6 +2045,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -2052,6 +2065,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JPanel menuSecretaria;
     private javax.swing.JTextField nomeField;
     private javax.swing.JComboBox pacientesBox;
+    private javax.swing.JComboBox pacientesBoxCons;
     private javax.swing.JPanel painelAtualizaBairro;
     private javax.swing.JPanel painelAtualizaCidade;
     private javax.swing.JPanel painelAtualizaConvenio;

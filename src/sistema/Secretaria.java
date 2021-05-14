@@ -15,62 +15,15 @@ public class Secretaria extends usuario.Usuario {
     public Secretaria() {
     }
   
-    public void cadastrarPaciente(ArrayList dados){
-        
-        int tel;
-        String nome, bairro, cidade, rua, tipoPlano; 
-        LocalDate dataNasc;
-        
-        Paciente pacienteNovo = new Paciente();
+    public void cadastrarPaciente(Paciente pac){
         GenericDAO<Paciente> dao = new GenericDAO<>();
-        
-        nome = (String) dados.get(0);
-        tel =  Integer.parseInt(dados.get(1).toString());
-        bairro = (String) dados.get(2);
-        cidade = (String) dados.get(3);
-        rua = (String) dados.get(4);
-        tipoPlano = (String) dados.get(5);
-        dataNasc = (LocalDate) dados.get(6);
-
-        pacienteNovo.setNome(nome);
-        pacienteNovo.setBairro(bairro);
-        pacienteNovo.setCidade(cidade);
-        pacienteNovo.setRua(rua);
-        pacienteNovo.setTelefone(tel);
-        pacienteNovo.setLocalDateNasc(dataNasc);
-        pacienteNovo.setTipoPlano(tipoPlano);
-        pacienteNovo.setConsultaCadastrada(false);
-        dao.salvar(pacienteNovo);
+        pac.setConsultaCadastrada(false);
+        dao.salvar(pac);
     }
-    
-        public void atualizarPaciente(ArrayList dados){
+   
+    public void atualizarPaciente(Paciente pac){
         GenericDAO<Paciente> dao = new GenericDAO<>();
-
-        int tel;
-        String nome, bairro, cidade, rua, tipoPlano; 
-        LocalDate dataNasc;
-        
-        Paciente alteracao = new Paciente();
-        
-        nome = (String) dados.get(0);
-        tel =  Integer.parseInt(dados.get(1).toString());
-        bairro = (String) dados.get(2);
-        cidade = (String) dados.get(3);
-        rua = (String) dados.get(4);
-        tipoPlano = (String) dados.get(5);
-        dataNasc = (LocalDate) dados.get(6);
-
-        alteracao.setNome(nome);
-        alteracao.setBairro(bairro);
-        alteracao.setCidade(cidade);
-        alteracao.setRua(rua);
-        alteracao.setTelefone(tel);
-        alteracao.setLocalDateNasc(dataNasc);
-        alteracao.setTipoPlano(tipoPlano);
-        alteracao.setConsultaCadastrada(false);
-        alteracao.setId(Integer.parseInt(dados.get(7).toString()));
-        
-        dao.alterar(alteracao);
+        dao.alterar(pac);
     }
         
     public void removerPaciente(Paciente pac){
@@ -78,10 +31,23 @@ public class Secretaria extends usuario.Usuario {
         dao.excluir(pac.getId(), pac.getClass());
     }
     
+    public Paciente consultarUmPaciente(int id){
+        GenericDAO<Paciente> dao = new GenericDAO<>();
+        Paciente pac = dao.consultar(id, Paciente.class);
+        return pac;
+}
+    
     public List<Paciente> consultarPaciente(){
         GenericDAO<Paciente> dao = new GenericDAO<>();
         List<Paciente> paciente;
         paciente = dao.consultar(Paciente.class);
+        return paciente;
+    }
+    
+        public List<Paciente> consultarPacienteNome(String nome){
+        GenericDAO<Paciente> dao = new GenericDAO<>();
+        List<Paciente> paciente;
+        paciente = dao.consultar(Paciente.class, nome);
         return paciente;
     }
 //    public Paciente consultarUmPaciente(Paciente paciente){

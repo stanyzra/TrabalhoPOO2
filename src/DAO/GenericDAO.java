@@ -71,10 +71,9 @@ public class GenericDAO<E> {
     }
     
     //método para buscar uma Entidade que possua o id passado pelo parâmetro (retorna somente uma Entidade)
-    public E consultar(int id, Class c){
-        
+    public E consultar(int id, Class c){    
         try{                                                            //tente            
-            return (E) em.find(c,id);                       //busca a Entidade com o id passado pelo parâmetro                                           //retorna a Entidade 
+            return (E) em.find(c, id);                       //busca a Entidade com o id passado pelo parâmetro                                           //retorna a Entidade 
         }catch(Exception e){                                            //captura o erro caso ocorra
             e.printStackTrace();                                        //imprime o erro
             return null;                                                //retorna nulo (não deu certo ou não foi encontrada!)
