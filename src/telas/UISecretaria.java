@@ -27,6 +27,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -51,6 +52,7 @@ public class UISecretaria extends javax.swing.JFrame {
 
     private List<Paciente> pacientes;
     private ButtonGroup grupoAtualizarConvenio;
+    private ButtonGroup grupoTipoConsulta;
     private ButtonModel modelAtualizarConvenio;
     final ArrayList<Consulta> consultas; 
     Secretaria sec;
@@ -64,6 +66,7 @@ public class UISecretaria extends javax.swing.JFrame {
         opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
         this.toBarras = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.grupoAtualizarConvenio = new javax.swing.ButtonGroup();
+        this.grupoTipoConsulta = new javax.swing.ButtonGroup();
         this.pacientes = new ArrayList<>();
         this.consultas = new ArrayList<>();
         this.modelAtualizarConvenio = grupoConvenio.getSelection();
@@ -77,6 +80,7 @@ public class UISecretaria extends javax.swing.JFrame {
         opcoesSec = (CardLayout) (cardOpcoesSecretaria.getLayout());
         opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
         this.grupoAtualizarConvenio = new javax.swing.ButtonGroup();
+        this.grupoTipoConsulta = new javax.swing.ButtonGroup();
         this.pacientes = pacientes;
         this.consultas = consultas;
         this.modelAtualizarConvenio = grupoConvenio.getSelection();
@@ -534,7 +538,6 @@ public class UISecretaria extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Selecione o paciente");
 
-        pacientesBox.setEditable(true);
         pacientesBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pacientesBoxActionPerformed(evt);
@@ -1525,7 +1528,7 @@ public class UISecretaria extends javax.swing.JFrame {
         radioNormal.setBackground(new java.awt.Color(51, 51, 51));
         radioNormal.setForeground(new java.awt.Color(204, 204, 204));
         radioNormal.setText("Normal");
-        radioNormal.setActionCommand("particular");
+        radioNormal.setActionCommand("normal");
         radioNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioNormalActionPerformed(evt);
@@ -1535,7 +1538,7 @@ public class UISecretaria extends javax.swing.JFrame {
         radioRetorno.setBackground(new java.awt.Color(51, 51, 51));
         radioRetorno.setForeground(new java.awt.Color(204, 204, 204));
         radioRetorno.setText("Retorno");
-        radioRetorno.setActionCommand("plano de saúde");
+        radioRetorno.setActionCommand("retorno");
         radioRetorno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioRetornoActionPerformed(evt);
@@ -1724,7 +1727,6 @@ public class UISecretaria extends javax.swing.JFrame {
             
             pacientes.forEach(itens -> {
                 comboBox.addItem(itens.getNome());
-
             });     
             atualizarCamposAlteracao();
         }
@@ -1775,7 +1777,6 @@ public class UISecretaria extends javax.swing.JFrame {
                 (dataSelecionada.get(Calendar.MONTH)+1),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
         pacienteNovo.setTipoPlano(grupoConvenio.getSelection().getActionCommand());
-
         sec.cadastrarPaciente(pacienteNovo);
         JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");        
         limparCampos(getContentPane());
@@ -1836,7 +1837,7 @@ public class UISecretaria extends javax.swing.JFrame {
         dadosAtualizados.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
                 (dataSelecionada.get(Calendar.MONTH)),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-        dadosAtualizados.setId(pacientes.get(pacientesBox.getSelectedIndex()).getId());
+        dadosAtualizados.setIdPaciente(pacientes.get(pacientesBox.getSelectedIndex()).getIdPaciente());
         
         sec.atualizarPaciente(dadosAtualizados);
         JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
@@ -1913,7 +1914,25 @@ public class UISecretaria extends javax.swing.JFrame {
     private void botaoCadastrarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarConsActionPerformed
         // TODO add your handling code here:
         opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
-        atualizarComboBoxPacientes(pacientesBoxCons,"cadastrarConsulta");
+        limparCampos(getContentPane());
+        pacientes = sec.consultarPaciente();
+
+        for (Paciente pac : pacientes) {
+            if (!pac.isConsultaCadastrada()) {
+                if (pacientes.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Atualizar Paciente", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    pacientesBoxCons.removeAllItems();
+                    opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
+
+                    pacientes.forEach(itens -> {
+                        pacientesBoxCons.addItem(itens.getNome());
+                    });     
+                    atualizarCamposAlteracao();
+                }
+                
+            }
+        }
     }//GEN-LAST:event_botaoCadastrarConsActionPerformed
    
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
@@ -1930,10 +1949,28 @@ public class UISecretaria extends javax.swing.JFrame {
 
     private void botaoSalvarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarConsActionPerformed
         // TODO add your handling code here:
+        Calendar dataSelecionada = dataConsCalendar.getCalendar();
+
+        grupoTipoConsulta.add(radioNormal);
+        grupoTipoConsulta.add(radioRetorno);
+
         Consulta novaCons = new Consulta();
         
-//        System.out.println(pacientesBoxCons.getSelectedIndex());
-        //novaCons.setPaciente();
+        System.out.println(pacientes.get(pacientesBoxCons.getSelectedIndex()).getIdPaciente());
+        novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        novaCons.setConsultaNormal(grupoTipoConsulta.getSelection().getActionCommand());
+        novaCons.setHorario(Integer.parseInt(horarioField.getText()));
+        novaCons.setMedico(medicoField.getText());
+        novaCons.setLocalDateCons(LocalDate.EPOCH);
+        novaCons.setLocalDateCons(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
+                (dataSelecionada.get(Calendar.MONTH)+1),
+                dataSelecionada.get(Calendar.DAY_OF_MONTH)));
+        System.out.println("antes: "+novaCons.getPaciente().isConsultaCadastrada());
+        novaCons.getPaciente().setConsultaCadastrada(true);
+        System.out.println("depois : "+novaCons.getPaciente().isConsultaCadastrada());
+        pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
+        
+        sec.cadastrarConsulta(novaCons);
         
     }//GEN-LAST:event_botaoSalvarConsActionPerformed
 

@@ -8,22 +8,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize=1)
+//@SequenceGenerator(name="ID_SEQ", allocationSize=1)
 
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private int idConsulta;
     @ManyToOne
     private Paciente paciente;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
     private LocalDate localDateCons;
     private Integer horario;
     private String medico;
-    private boolean consultaNormal; //consulta normal se true, retorno se false
+    private String consultaNormal; //consulta normal se true, retorno se false
 
     public Consulta() {
     }
@@ -52,20 +51,20 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public boolean isConsultaNormal() {
+    public String getConsultaNormal() {
         return consultaNormal;
     }
 
-    public void setConsultaNormal(boolean consultaNormal) {
+    public void setConsultaNormal(String consultaNormal) {
         this.consultaNormal = consultaNormal;
     }
 
-    public Integer getId() {
-        return Id;
+    public int getIdConsulta() {
+        return idConsulta;
     }
 
-    public void setId(Integer Id) {
-        this.Id = Id;
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
     public Integer getHorario() {

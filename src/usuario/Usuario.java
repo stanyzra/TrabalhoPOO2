@@ -5,6 +5,7 @@
  */
 package usuario;
 
+import POJO.Consulta;
 import POJO.Paciente;
 
 public class Usuario {
@@ -45,7 +46,7 @@ public class Usuario {
         
     }
 
-    public void cadastrarConsulta() {
+    public void cadastrarConsulta(Consulta cons) {
         
     }
     

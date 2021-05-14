@@ -12,15 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
  
 @Entity
-@SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize=1)
 public class Paciente {
     //dados de identificação
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int idPaciente;
     private String nome;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
     private LocalDate localDateNasc;
@@ -41,12 +39,12 @@ public class Paciente {
         
     }
 
-    public int getId() {
-        return id;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
     
     public Consulta getConsulta() {

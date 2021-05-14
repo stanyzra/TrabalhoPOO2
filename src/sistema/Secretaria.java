@@ -1,6 +1,7 @@
 package sistema;
 
 import DAO.GenericDAO;
+import POJO.Consulta;
 import POJO.Paciente;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Secretaria extends usuario.Usuario {
         
     public void removerPaciente(Paciente pac){
         GenericDAO<Paciente> dao = new GenericDAO<>();
-        dao.excluir(pac.getId(), pac.getClass());
+        dao.excluir(pac.getIdPaciente(), pac.getClass());
     }
     
     public Paciente consultarUmPaciente(int id){
@@ -44,11 +45,15 @@ public class Secretaria extends usuario.Usuario {
         return paciente;
     }
     
-        public List<Paciente> consultarPacienteNome(String nome){
+    public List<Paciente> consultarPacienteNome(String nome){
         GenericDAO<Paciente> dao = new GenericDAO<>();
         List<Paciente> paciente;
         paciente = dao.consultar(Paciente.class, nome);
         return paciente;
+    }
+    public void cadastrarConsulta(Consulta cons){
+        GenericDAO<Consulta> dao = new GenericDAO();
+        dao.salvar(cons);
     }
 //    public Paciente consultarUmPaciente(Paciente paciente){
 //        GenericDAO<Paciente> dao = new GenericDAO<>();
