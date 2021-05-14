@@ -5,11 +5,15 @@
  */
 package trabalho2;
 
+import DAO.GenericDAO;
 import POJO.Consulta;
 import POJO.DadosAdicionais;
 import POJO.Paciente;
 import POJO.Prontuario;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.util.ArrayList;
+import java.util.Arrays;
 import sistema.Secretaria;
 import telas.UISecretaria;
 import usuario.TipoUsuario
@@ -27,11 +31,12 @@ public class Trabalho2 extends javax.swing.JFrame {
     ArrayList<Paciente> pacientes = new ArrayList();
     ArrayList<Consulta> consultas = new ArrayList();
     ArrayList<Prontuario> prontuario = new ArrayList();
+    GenericDAO dao = new GenericDAO();
     ArrayList dados = new ArrayList();
     ArrayList<DadosAdicionais> dadosAdicionais = new ArrayList();
 
     //Medico medico = new Medico(pacientes,consultas, dadosAdicionais, prontuario);
-    Secretaria secretaria = new Secretaria(pacientes, consultas);
+    Secretaria secretaria = new Secretaria();
     //GerenciadorMensagem gerenciador = new GerenciadorMensagem(pacientes, consultas);
 
     TipoUsuario tipoUsuario = new TipoUsuario();
@@ -137,18 +142,14 @@ public class Trabalho2 extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Trabalho2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Trabalho2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Trabalho2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            FlatLightLaf.install();
+            System.out.println(Arrays.toString(javax.swing.UIManager.getInstalledLookAndFeels()));
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Flatlaf Dark".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
+//                    break;
+//                }
+//            }
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Trabalho2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

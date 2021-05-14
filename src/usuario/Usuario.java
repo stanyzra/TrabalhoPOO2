@@ -21,7 +21,7 @@ public class Usuario {
         
     }
     
-    public void atualizarPaciente(){
+    public void atualizarPaciente(ArrayList dados){
         
     }
     

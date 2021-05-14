@@ -6,7 +6,6 @@
 package POJO;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +19,7 @@ public class Paciente {
     //dados de identificação
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
     private String nome;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
     private LocalDate localDateNasc;
@@ -38,14 +37,15 @@ public class Paciente {
     private boolean consultaCadastrada, dadosAdicionaisCadastrado, prontuarioCadastrado; //convenio
 
     public Paciente() {
+        
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public Consulta getConsulta() {

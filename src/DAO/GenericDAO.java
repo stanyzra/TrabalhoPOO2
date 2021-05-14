@@ -41,8 +41,7 @@ public class GenericDAO<E> {
     
     //método para alterar e retornar a Entidade alterada
     public E alterar(E entidade){
-
-        try{                                 
+        try{       
             em.getTransaction().begin();
             entidade = em.merge(entidade);
             em.getTransaction().commit();
@@ -73,7 +72,8 @@ public class GenericDAO<E> {
     
     //método para buscar uma Entidade que possua o id passado pelo parâmetro (retorna somente uma Entidade)
     public E consultar(int id, Class c){
-        try{                                                            //tente
+        
+        try{                                                            //tente            
             return (E) em.find(c,id);                       //busca a Entidade com o id passado pelo parâmetro                                           //retorna a Entidade 
         }catch(Exception e){                                            //captura o erro caso ocorra
             e.printStackTrace();                                        //imprime o erro
@@ -83,10 +83,12 @@ public class GenericDAO<E> {
         }
     }
     
-    //método que busca todas as Entidades 
+    //método que busca todas as Ent idades 
     public List<E> consultar(Class c){
         try{                                                                            //tente
-            return em.createQuery("from "+c.getSimpleName()).getResultList();  //busca todas as Entidades e transforma em uma List
+            em.getTransaction();
+            List<E> entidades = em.createQuery("SELECT a FROM "+c.getSimpleName()+" a").getResultList();
+            return entidades;                                                             //busca todas as Entidades e transforma em uma List
         }catch(Exception e){                                                            //captura o erro caso ocorra
             e.printStackTrace();                                                        //imprime o erro
             return null;                                                                //retorna nulo (não deu certo ou não foi encontrada!)
@@ -94,6 +96,7 @@ public class GenericDAO<E> {
             em.close();                                                            //fecha o Gerenciador de Entidades
         }
     }
+
     
     //método que busca todas as Entidades com like
     public List<E> consultar(Class c, String p){
