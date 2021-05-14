@@ -23,7 +23,7 @@ public class DadosAdicionais {
     //dados adicionais   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long idDadosAdicionais;
     private boolean fuma;
     private boolean bebe;
     private boolean colesterol;
@@ -38,12 +38,12 @@ public class DadosAdicionais {
         
     }
 
-    public int getId() {
-        return id;
+    public long getIdDadosAdicionais() {
+        return idDadosAdicionais;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdDadosAdicionais(long idDadosAdicionais) {
+        this.idDadosAdicionais = idDadosAdicionais;
     }
     
     public Paciente getPaciente() {

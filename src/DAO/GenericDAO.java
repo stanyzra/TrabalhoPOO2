@@ -55,7 +55,7 @@ public class GenericDAO<E> {
     }
     
     //método para excluir uma Entidade 
-    public boolean excluir(int id, Class c){
+    public boolean excluir(long id, Class c){
         try{                                                //tente
             em.getTransaction().begin();                                      //inicia transação    
             em.remove(em.find(c,id));             //exclui a entidade a ser salva

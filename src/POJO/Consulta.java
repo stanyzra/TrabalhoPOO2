@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idConsulta;
+    private long idConsulta;
     @ManyToOne
     private Paciente paciente;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
@@ -59,11 +59,11 @@ public class Consulta {
         this.consultaNormal = consultaNormal;
     }
 
-    public int getIdConsulta() {
+    public long getIdConsulta() {
         return idConsulta;
     }
 
-    public void setIdConsulta(int idConsulta) {
+    public void setIdConsulta(long idConsulta) {
         this.idConsulta = idConsulta;
     }
 

@@ -18,7 +18,7 @@ public class Paciente {
     //dados de identificação
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idPaciente;
+    private long idPaciente;
     private String nome;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
     private LocalDate localDateNasc;
@@ -39,11 +39,11 @@ public class Paciente {
         
     }
 
-    public int getIdPaciente() {
+    public long getIdPaciente() {
         return idPaciente;
     }
-
-    public void setIdPaciente(int idPaciente) {
+    
+    public void setIdPaciente(long idPaciente) {
         this.idPaciente = idPaciente;
     }
     

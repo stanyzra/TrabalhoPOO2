@@ -67,7 +67,7 @@ public class UISecretaria extends javax.swing.JFrame {
         this.toBarras = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.grupoAtualizarConvenio = new javax.swing.ButtonGroup();
         this.grupoTipoConsulta = new javax.swing.ButtonGroup();
-        this.pacientes = new ArrayList<>();
+        //this.pacientes = new List<>();
         this.consultas = new ArrayList<>();
         this.modelAtualizarConvenio = grupoConvenio.getSelection();
         this.sec = new Secretaria();
@@ -1741,6 +1741,7 @@ public class UISecretaria extends javax.swing.JFrame {
         limparCampos(getContentPane());
         opcoesSec.show(cardOpcoesSecretaria, "cadastrarPaciente");
     }//GEN-LAST:event_botaoCadastrarActionPerformed
+    
     public void atualizarListaRemover(){
         pacientes = sec.consultarPaciente();
         if (pacientes.isEmpty()) {
@@ -1802,6 +1803,8 @@ public class UISecretaria extends javax.swing.JFrame {
             }
         }
         grupoConvenio.clearSelection();
+        grupoTipoConsulta.clearSelection();
+        
         return painel;
     }
     
@@ -1887,7 +1890,14 @@ public class UISecretaria extends javax.swing.JFrame {
         //int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", JOptionPane.WARNING_MESSAGE);
         int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", 1);
         if(resposta == 0){
-            sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
+            if(pacientes.get(listaPacientes.getSelectedIndex()).isConsultaCadastrada()){
+                pacientes.get(listaPacientes.getSelectedIndex()).setConsulta(null);
+                sec.atualizarPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
+                //sec.removerConsulta(pacientes.get(listaPacientes.getSelectedIndex()).getConsulta());
+                sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
+            }else{
+                sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
+            }
             JOptionPane.showMessageDialog(null, "Paciente removido");
             atualizarListaRemover();
         }else if (resposta == 1){
@@ -1911,28 +1921,35 @@ public class UISecretaria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoAtualizarConsActionPerformed
 
-    private void botaoCadastrarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarConsActionPerformed
-        // TODO add your handling code here:
-        opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
+    public void atualizarComboBoxCons(JComboBox comboBox){
         limparCampos(getContentPane());
         pacientes = sec.consultarPaciente();
-
-        for (Paciente pac : pacientes) {
-            if (!pac.isConsultaCadastrada()) {
-                if (pacientes.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Atualizar Paciente", JOptionPane.WARNING_MESSAGE);
+        
+        if (pacientes.isEmpty()) {
+            opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Cadastrar consulta", JOptionPane.WARNING_MESSAGE);
+        }else {
+            for (Paciente pac : pacientes) {
+                if (pac.isConsultaCadastrada()){
+                    opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
+                    JOptionPane.showMessageDialog(null, "Todos os pacientes já possuem uma consulta cadastrada", "Cadastrar consulta", JOptionPane.WARNING_MESSAGE);
                 }else{
-                    pacientesBoxCons.removeAllItems();
+                    comboBox.removeAllItems();
                     opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
 
                     pacientes.forEach(itens -> {
-                        pacientesBoxCons.addItem(itens.getNome());
+                        comboBox.addItem(itens.getNome());
                     });     
-                    atualizarCamposAlteracao();
-                }
-                
+                }   
             }
         }
+    }
+    
+    private void botaoCadastrarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarConsActionPerformed
+        // TODO add your handling code here:
+        opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
+        atualizarComboBoxCons(pacientesBoxCons);
+        
     }//GEN-LAST:event_botaoCadastrarConsActionPerformed
    
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
@@ -1950,29 +1967,30 @@ public class UISecretaria extends javax.swing.JFrame {
     private void botaoSalvarConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarConsActionPerformed
         // TODO add your handling code here:
         Calendar dataSelecionada = dataConsCalendar.getCalendar();
-
+        
         grupoTipoConsulta.add(radioNormal);
         grupoTipoConsulta.add(radioRetorno);
 
         Consulta novaCons = new Consulta();
-        
-        System.out.println(pacientes.get(pacientesBoxCons.getSelectedIndex()).getIdPaciente());
-        novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        pacientes = sec.consultarPaciente();
+
         novaCons.setConsultaNormal(grupoTipoConsulta.getSelection().getActionCommand());
         novaCons.setHorario(Integer.parseInt(horarioField.getText()));
         novaCons.setMedico(medicoField.getText());
-        novaCons.setLocalDateCons(LocalDate.EPOCH);
         novaCons.setLocalDateCons(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
                 (dataSelecionada.get(Calendar.MONTH)+1),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-        System.out.println("antes: "+novaCons.getPaciente().isConsultaCadastrada());
-        novaCons.getPaciente().setConsultaCadastrada(true);
-        System.out.println("depois : "+novaCons.getPaciente().isConsultaCadastrada());
         
         pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
+        novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        novaCons.getPaciente().setConsultaCadastrada(true);
         
         sec.cadastrarConsulta(novaCons);
-        
+        sec.atualizarPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso.");
+        pacientesBoxCons.removeItemAt(pacientesBoxCons.getSelectedIndex());
+        limparCampos(getContentPane());
+        atualizarComboBoxCons(pacientesBoxCons);
     }//GEN-LAST:event_botaoSalvarConsActionPerformed
 
     private void pacientesBoxConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxConsActionPerformed

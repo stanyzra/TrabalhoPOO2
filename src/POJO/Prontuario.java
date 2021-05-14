@@ -22,7 +22,7 @@ import javax.persistence.SequenceGenerator;
 public class Prontuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long idProntuario;
     private String sintomas;
     private String diagnosticoDoenca;
     private String prescricaoTratamento;
@@ -36,12 +36,12 @@ public class Prontuario {
         return paciente;
     }
 
-    public int getId() {
-        return Id;
+    public long getIdProntuario() {
+        return idProntuario;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setIdProntuario(long idProntuario) {
+        this.idProntuario = idProntuario;
     }
 
     public void setPaciente(Paciente paciente) {
