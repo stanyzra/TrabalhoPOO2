@@ -2,21 +2,22 @@
 package POJO;
 
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
-//@SequenceGenerator(name="ID_SEQ", allocationSize=1)
 
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idConsulta;
-    @ManyToOne
+    private int idConsulta;
+    @OneToOne
     private Paciente paciente;
     @Convert(converter = conversor.LocalDateAttributeConverter.class)
     private LocalDate localDateCons;
@@ -59,11 +60,11 @@ public class Consulta {
         this.consultaNormal = consultaNormal;
     }
 
-    public long getIdConsulta() {
+    public int getIdConsulta() {
         return idConsulta;
     }
 
-    public void setIdConsulta(long idConsulta) {
+    public void setIdConsulta(int idConsulta) {
         this.idConsulta = idConsulta;
     }
 

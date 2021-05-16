@@ -36,7 +36,7 @@ public class Secretaria extends usuario.Usuario {
         GenericDAO<Paciente> dao = new GenericDAO<>();
         Paciente pac = dao.consultar(id, Paciente.class);
         return pac;
-}
+    }
     
     public List<Paciente> consultarPaciente(){
         GenericDAO dao = new GenericDAO<>();
@@ -58,6 +58,18 @@ public class Secretaria extends usuario.Usuario {
     public void removerConsulta(Consulta cons){
         GenericDAO dao = new GenericDAO<>();
         dao.excluir(cons.getIdConsulta(), cons.getClass());
+    }
+    
+    public List<Consulta> consultarConsultas(){
+        GenericDAO dao = new GenericDAO<>();
+        List<Consulta> consulta;
+        consulta = dao.consultar(Paciente.class);
+        return consulta;
+    }
+    public Consulta consultarUmaConsulta(int id){
+        GenericDAO<Consulta> dao = new GenericDAO<>();
+        Consulta cons = dao.consultar(id, Consulta.class);
+        return cons;
     }
 //    public Paciente consultarUmPaciente(Paciente paciente){
 //        GenericDAO<Paciente> dao = new GenericDAO<>();

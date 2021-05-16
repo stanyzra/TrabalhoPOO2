@@ -17,12 +17,11 @@ import javax.persistence.SequenceGenerator;
  * @author aleix
  */
 @Entity
-@SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize=1)
 
 public class Prontuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idProntuario;
+    private int idProntuario;
     private String sintomas;
     private String diagnosticoDoenca;
     private String prescricaoTratamento;
@@ -36,11 +35,11 @@ public class Prontuario {
         return paciente;
     }
 
-    public long getIdProntuario() {
+    public int getIdProntuario() {
         return idProntuario;
     }
 
-    public void setIdProntuario(long idProntuario) {
+    public void setIdProntuario(int idProntuario) {
         this.idProntuario = idProntuario;
     }
 

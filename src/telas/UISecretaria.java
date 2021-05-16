@@ -51,10 +51,10 @@ public class UISecretaria extends javax.swing.JFrame {
     final DateTimeFormatter toBarras; 
 
     private List<Paciente> pacientes;
+    private List<Consulta> consultas; 
     private ButtonGroup grupoAtualizarConvenio;
     private ButtonGroup grupoTipoConsulta;
     private ButtonModel modelAtualizarConvenio;
-    final ArrayList<Consulta> consultas; 
     Secretaria sec;
     /**
      * Creates new form secretaria
@@ -552,7 +552,7 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pacientesBox, 0, 1, Short.MAX_VALUE)
+                .addComponent(pacientesBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelSelecionarPacienteLayout.setVerticalGroup(
@@ -986,14 +986,14 @@ public class UISecretaria extends javax.swing.JFrame {
             removerPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(removerPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelExcluirPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(painelExcluirPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         removerPacienteLayout.setVerticalGroup(
             removerPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(removerPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelExcluirPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(painelExcluirPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1681,7 +1681,7 @@ public class UISecretaria extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1886,14 +1886,16 @@ public class UISecretaria extends javax.swing.JFrame {
 
     private void botaoRemoverPacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverPacActionPerformed
         // TODO add your handling code here:
-        
+        consultas = sec.consultarConsultas();
         //int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", JOptionPane.WARNING_MESSAGE);
         int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", 1);
         if(resposta == 0){
             if(pacientes.get(listaPacientes.getSelectedIndex()).isConsultaCadastrada()){
+                int indexCons = pacientes.get(listaPacientes.getSelectedIndex()).getConsulta().getIdConsulta();
+                Consulta cons = sec.consultarUmaConsulta(indexCons);
                 pacientes.get(listaPacientes.getSelectedIndex()).setConsulta(null);
                 sec.atualizarPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
-                //sec.removerConsulta(pacientes.get(listaPacientes.getSelectedIndex()).getConsulta());
+                sec.removerConsulta(cons);
                 sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
             }else{
                 sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
@@ -1922,25 +1924,27 @@ public class UISecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAtualizarConsActionPerformed
 
     public void atualizarComboBoxCons(JComboBox comboBox){
+        comboBox.removeAllItems();
         limparCampos(getContentPane());
         pacientes = sec.consultarPaciente();
+        int total = 0;
         
         if (pacientes.isEmpty()) {
             opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
             JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Cadastrar consulta", JOptionPane.WARNING_MESSAGE);
         }else {
             for (Paciente pac : pacientes) {
-                if (pac.isConsultaCadastrada()){
-                    opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
-                    JOptionPane.showMessageDialog(null, "Todos os pacientes já possuem uma consulta cadastrada", "Cadastrar consulta", JOptionPane.WARNING_MESSAGE);
-                }else{
-                    comboBox.removeAllItems();
+                if (!pac.isConsultaCadastrada()){
+                    //comboBox.removeAllItems();
                     opcoesSec.show(cardOpcoesSecretaria, "cadastrarConsulta");
-
-                    pacientes.forEach(itens -> {
-                        comboBox.addItem(itens.getNome());
-                    });     
-                }   
+                    comboBox.addItem(pac.getNome());
+                }else{
+                    total++;
+                    if (pacientes.size() == total) {
+                        opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
+                        JOptionPane.showMessageDialog(null, "Todos os pacientes já possuem uma consulta cadastrada", "Cadastrar consulta", JOptionPane.WARNING_MESSAGE);
+                    } 
+                }
             }
         }
     }
@@ -1970,9 +1974,15 @@ public class UISecretaria extends javax.swing.JFrame {
         
         grupoTipoConsulta.add(radioNormal);
         grupoTipoConsulta.add(radioRetorno);
-
-        Consulta novaCons = new Consulta();
+        
         pacientes = sec.consultarPaciente();
+        for (int i = 0; i < pacientes.size(); i++) {
+            if (pacientes.get(i).isConsultaCadastrada()) {
+                pacientes.remove(i);
+            }
+        }
+        
+        Consulta novaCons = new Consulta();
 
         novaCons.setConsultaNormal(grupoTipoConsulta.getSelection().getActionCommand());
         novaCons.setHorario(Integer.parseInt(horarioField.getText()));
@@ -1988,9 +1998,13 @@ public class UISecretaria extends javax.swing.JFrame {
         sec.cadastrarConsulta(novaCons);
         sec.atualizarPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
         JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso.");
+
+        pacientes.remove(pacientesBoxCons.getSelectedIndex());
         pacientesBoxCons.removeItemAt(pacientesBoxCons.getSelectedIndex());
+
         limparCampos(getContentPane());
         atualizarComboBoxCons(pacientesBoxCons);
+        
     }//GEN-LAST:event_botaoSalvarConsActionPerformed
 
     private void pacientesBoxConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxConsActionPerformed

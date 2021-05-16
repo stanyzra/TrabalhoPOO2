@@ -17,13 +17,12 @@ import javax.persistence.SequenceGenerator;
  * @author aleix
  */
 @Entity
-@SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence", allocationSize=1)
 
 public class DadosAdicionais {
     //dados adicionais   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idDadosAdicionais;
+    private int idDadosAdicionais;
     private boolean fuma;
     private boolean bebe;
     private boolean colesterol;
@@ -38,11 +37,11 @@ public class DadosAdicionais {
         
     }
 
-    public long getIdDadosAdicionais() {
+    public int getIdDadosAdicionais() {
         return idDadosAdicionais;
     }
 
-    public void setIdDadosAdicionais(long idDadosAdicionais) {
+    public void setIdDadosAdicionais(int idDadosAdicionais) {
         this.idDadosAdicionais = idDadosAdicionais;
     }
     
