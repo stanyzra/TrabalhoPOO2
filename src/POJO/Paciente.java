@@ -26,6 +26,7 @@ public class Paciente {
     private String bairro;
     private String cidade;
     private String rua;
+    private String email;
     private int telefone;
     @OneToOne
     private Consulta consulta;
@@ -46,6 +47,14 @@ public class Paciente {
     
     public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public Consulta getConsulta() {
