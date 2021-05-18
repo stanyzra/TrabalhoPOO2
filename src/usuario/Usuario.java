@@ -45,11 +45,11 @@ public class Usuario {
         
     }
     
-    public void atualizarConsulta() {
+    public void atualizarConsulta(Consulta cons) {
         
     }
     
-    public void removerConsulta() {
+    public void removerConsulta(Consulta cons) {
         
     }
     

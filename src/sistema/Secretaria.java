@@ -38,7 +38,7 @@ public class Secretaria extends usuario.Usuario {
         return pac;
     }
     
-    public List<Paciente> consultarPaciente(){
+    public List<Paciente> consultarPacientes(){
         GenericDAO dao = new GenericDAO<>();
         List<Paciente> paciente;
         paciente = dao.consultar(Paciente.class);
@@ -51,10 +51,17 @@ public class Secretaria extends usuario.Usuario {
         paciente = dao.consultar(Paciente.class, nome);
         return paciente;
     }
+    
     public void cadastrarConsulta(Consulta cons){
         GenericDAO dao = new GenericDAO();
         dao.salvar(cons);
     }
+    
+    public void atualizarConsulta(Consulta cons){
+        GenericDAO dao = new GenericDAO<>();
+        dao.alterar(cons);
+    }
+    
     public void removerConsulta(Consulta cons){
         GenericDAO dao = new GenericDAO<>();
         dao.excluir(cons.getIdConsulta(), cons.getClass());
@@ -63,7 +70,7 @@ public class Secretaria extends usuario.Usuario {
     public List<Consulta> consultarConsultas(){
         GenericDAO dao = new GenericDAO<>();
         List<Consulta> consulta;
-        consulta = dao.consultar(Paciente.class);
+        consulta = dao.consultar(Consulta.class);
         return consulta;
     }
     public Consulta consultarUmaConsulta(int id){
