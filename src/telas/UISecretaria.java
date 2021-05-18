@@ -241,6 +241,13 @@ public class UISecretaria extends javax.swing.JFrame {
         painelNomePaciente = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         nomePacienteConsField = new javax.swing.JTextField();
+        removerConsulta = new javax.swing.JPanel();
+        painelExcluirConsulta = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaCons = new javax.swing.JList<>();
+        painelRemoverCons = new javax.swing.JPanel();
+        botaoRemoverCons = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -2030,6 +2037,96 @@ public class UISecretaria extends javax.swing.JFrame {
 
         cardOpcoesSecretaria.add(atualizarConsulta, "atualizarConsulta");
 
+        removerConsulta.setBackground(new java.awt.Color(51, 51, 51));
+
+        painelExcluirConsulta.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel31.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel31.setText("Selecione o paciente em que a consulta está cadastrada:");
+
+        jScrollPane2.setViewportView(listaCons);
+
+        painelRemoverCons.setBackground(new java.awt.Color(51, 51, 51));
+
+        botaoRemoverCons.setBackground(new java.awt.Color(204, 204, 204));
+        botaoRemoverCons.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoRemoverCons.setForeground(new java.awt.Color(51, 51, 51));
+        botaoRemoverCons.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoRemoverCons.setText("Remover");
+        botaoRemoverCons.setBorder(null);
+        botaoRemoverCons.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoRemoverCons.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoRemoverCons.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoRemoverCons.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoRemoverCons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverConsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelRemoverConsLayout = new javax.swing.GroupLayout(painelRemoverCons);
+        painelRemoverCons.setLayout(painelRemoverConsLayout);
+        painelRemoverConsLayout.setHorizontalGroup(
+            painelRemoverConsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRemoverConsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botaoRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        painelRemoverConsLayout.setVerticalGroup(
+            painelRemoverConsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRemoverConsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout painelExcluirConsultaLayout = new javax.swing.GroupLayout(painelExcluirConsulta);
+        painelExcluirConsulta.setLayout(painelExcluirConsultaLayout);
+        painelExcluirConsultaLayout.setHorizontalGroup(
+            painelExcluirConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelExcluirConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelExcluirConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(painelExcluirConsultaLayout.createSequentialGroup()
+                        .addGap(0, 462, Short.MAX_VALUE)
+                        .addComponent(painelRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelExcluirConsultaLayout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        painelExcluirConsultaLayout.setVerticalGroup(
+            painelExcluirConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelExcluirConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(painelRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout removerConsultaLayout = new javax.swing.GroupLayout(removerConsulta);
+        removerConsulta.setLayout(removerConsultaLayout);
+        removerConsultaLayout.setHorizontalGroup(
+            removerConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removerConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelExcluirConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        removerConsultaLayout.setVerticalGroup(
+            removerConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removerConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelExcluirConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        cardOpcoesSecretaria.add(removerConsulta, "removerConsulta");
+
         jSplitPane2.setRightComponent(cardOpcoesSecretaria);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2269,9 +2366,25 @@ public class UISecretaria extends javax.swing.JFrame {
         menu.show(cardMenu, "menuSecretaria");
         opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
     }//GEN-LAST:event_botaoVoltarConsvoltarMenuPrincipal
-
+    public void atualizarListaRemoverCons(){
+        consultas = sec.consultarConsultas();
+        if (consultas.isEmpty()) {
+            opcoesSec.show(cardOpcoesSecretaria, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhuma consulta cadastrada", "Remover Consulta", JOptionPane.WARNING_MESSAGE);
+        }else{
+             DefaultListModel itensConsulta = new DefaultListModel();
+             consultas.forEach(itens -> {
+                 itensConsulta.addElement(itens.getPaciente().getNome());
+            });
+            
+             listaCons.setModel(itensConsulta);
+        }
+    }
     private void botaoMenuRemoverConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuRemoverConsActionPerformed
         // TODO add your handling code here:
+        limparCampos(getContentPane());
+        opcoesSec.show(cardOpcoesSecretaria, "removerConsulta");
+        atualizarListaRemoverCons();
     }//GEN-LAST:event_botaoMenuRemoverConsActionPerformed
     public void atualizarCamposConsAlteracao(){
         
@@ -2453,6 +2566,26 @@ public class UISecretaria extends javax.swing.JFrame {
         atualizarCamposConsAlteracao();
     }//GEN-LAST:event_botaoAtualizarConsActionPerformed
 
+    private void botaoRemoverConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverConsActionPerformed
+        // TODO add your handling code here:
+        consultas = sec.consultarConsultas();
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover essa consulta?", "Remoção", 1);
+        if(resposta == 0){
+            int indexCons = consultas.get(listaCons.getSelectedIndex()).getIdConsulta();
+            Consulta cons = sec.consultarUmaConsulta(indexCons);
+            consultas.get(listaCons.getSelectedIndex()).getPaciente().setConsultaCadastrada(false);
+            consultas.get(listaCons.getSelectedIndex()).getPaciente().setConsulta(null);
+            sec.atualizarPaciente(consultas.get(listaCons.getSelectedIndex()).getPaciente());
+            
+            sec.removerConsulta(cons);            
+            
+            JOptionPane.showMessageDialog(null, "Consulta removida");
+            atualizarListaRemoverCons();
+        }else if (resposta == 1){
+            JOptionPane.showMessageDialog(null, "Consulta mantida");
+        }
+    }//GEN-LAST:event_botaoRemoverConsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2524,6 +2657,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JButton botaoPaciente;
     private javax.swing.JButton botaoRelatorio;
     private javax.swing.JButton botaoRemover;
+    private javax.swing.JButton botaoRemoverCons;
     private javax.swing.JButton botaoRemoverPac;
     private javax.swing.JButton botaoSalvarCons;
     private javax.swing.JButton botaoSalvarDados;
@@ -2581,6 +2715,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2588,7 +2723,9 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JList<String> listaCons;
     private javax.swing.JList<String> listaPacientes;
     private javax.swing.JTextField medicoField;
     private javax.swing.JPanel menuGerenciarConsulta;
@@ -2616,6 +2753,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JPanel painelConvenio;
     private javax.swing.JPanel painelData;
     private javax.swing.JPanel painelDataCons;
+    private javax.swing.JPanel painelExcluirConsulta;
     private javax.swing.JPanel painelExcluirPaciente;
     private javax.swing.JPanel painelHorario;
     private javax.swing.JPanel painelMedico;
@@ -2623,6 +2761,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JPanel painelNomePaciente;
     private javax.swing.JPanel painelPacCons;
     private javax.swing.JPanel painelRemover;
+    private javax.swing.JPanel painelRemoverCons;
     private javax.swing.JPanel painelRua;
     private javax.swing.JPanel painelSalvar;
     private javax.swing.JPanel painelSalvarCons;
@@ -2634,6 +2773,7 @@ public class UISecretaria extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioParticular;
     private javax.swing.JRadioButton radioPlanodeSaude;
     private javax.swing.JRadioButton radioRetorno;
+    private javax.swing.JPanel removerConsulta;
     private javax.swing.JPanel removerPaciente;
     private javax.swing.JTextField ruaField;
     private javax.swing.JTextField telField;
