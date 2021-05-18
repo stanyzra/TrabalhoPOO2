@@ -14,7 +14,9 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.ArrayList;
 import java.util.Arrays;
+import sistema.Medico;
 import sistema.Secretaria;
+import telas.UIMedico;
 import telas.UISecretaria;
 import usuario.TipoUsuario
 ;
@@ -37,6 +39,7 @@ public class Trabalho2 extends javax.swing.JFrame {
 
     //Medico medico = new Medico(pacientes,consultas, dadosAdicionais, prontuario);
     Secretaria secretaria = new Secretaria();
+    Medico medico = new Medico();
     //GerenciadorMensagem gerenciador = new GerenciadorMensagem(pacientes, consultas);
 
     TipoUsuario tipoUsuario = new TipoUsuario();
@@ -96,6 +99,11 @@ public class Trabalho2 extends javax.swing.JFrame {
         usuarioMed.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
         usuarioMed.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
         usuarioMed.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        usuarioMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioMedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +139,12 @@ public class Trabalho2 extends javax.swing.JFrame {
         tipoUsuario.setUsuario(secretaria);
         
     }//GEN-LAST:event_usuarioSecActionPerformed
+
+    private void usuarioMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioMedActionPerformed
+        new UIMedico().setVisible(true);
+        this.dispose();
+        tipoUsuario.setUsuario(medico);
+    }//GEN-LAST:event_usuarioMedActionPerformed
 
     /**
      * @param args the command line arguments
