@@ -2690,6 +2690,7 @@ public class UISecretaria extends javax.swing.JFrame {
         dadosAtualizadosCons.setLocalDateCons(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
                 (dataSelecionada.get(Calendar.MONTH)+1),
                 dataSelecionada.get(Calendar.DAY_OF_MONTH)));
+        System.out.println(consBox.getSelectedIndex());
         dadosAtualizadosCons.setIdConsulta(consultas.get(consBox.getSelectedIndex()).getIdConsulta());
         dadosAtualizadosCons.setPaciente(consultas.get(consBox.getSelectedIndex()).getPaciente());
         

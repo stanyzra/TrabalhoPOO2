@@ -1,6 +1,8 @@
 package usuario;
 
+import DAO.GenericDAO;
 import POJO.Consulta;
+import POJO.DadosAdicionais;
 import POJO.Paciente;
 
 public class Usuario {
@@ -23,6 +25,18 @@ public class Usuario {
     
     public void removerPaciente(Paciente pac){
         
+    }
+    
+    public void cadastrarDadosPacientes(DadosAdicionais dados){
+
+    }
+    
+    public void atualizarDadosPaciente(DadosAdicionais dados){
+
+    }
+    
+    public void removerDadosPaciente(DadosAdicionais dados){
+
     }
     
     public void cadastrarProntuario(){

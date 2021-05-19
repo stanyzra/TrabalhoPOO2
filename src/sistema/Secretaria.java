@@ -19,6 +19,8 @@ public class Secretaria extends usuario.Usuario {
     public void cadastrarPaciente(Paciente pac){
         GenericDAO dao = new GenericDAO<>();
         pac.setConsultaCadastrada(false);
+        pac.setDadosAdicionaisCadastrado(false);
+        pac.setProntuarioCadastrado(false);
         dao.salvar(pac);
     }
    
