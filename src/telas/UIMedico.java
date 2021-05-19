@@ -1809,12 +1809,28 @@ public class UIMedico extends javax.swing.JFrame {
         }
     }
     
+    public void atualizarComboBoxPront(){ 
+        pacientesBoxAttProntuario.removeAllItems();
+        limparCampos(getContentPane());
+
+        if (prontuarios.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhum prontuário cadastrado", "Atualizar prontuário", JOptionPane.WARNING_MESSAGE);
+        }else{
+            prontuarios.forEach(itens -> {
+                pacientesBoxAttProntuario.addItem(itens.getPaciente().getNome());
+            });     
+            atualizarCamposAlteracaoDados();
+        }
+    }
+    
     private void botaoAtualizarDadosPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarDadosPacienteActionPerformed
         limparCampos(getContentPane());
         opcoesMed.show(cardOpcoesMedico, "atualizarDadosPaciente");
         dadosAdicionais = med.consultarDadosAdicionais();
         atualizarComboBoxDados();
         atualizarCamposAlteracaoDados();
+        
     }//GEN-LAST:event_botaoAtualizarDadosPacienteActionPerformed
 
     private void botaoCadastrarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarDadosActionPerformed
@@ -1840,10 +1856,18 @@ public class UIMedico extends javax.swing.JFrame {
 
     private void botaoRemoverProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverProntuarioActionPerformed
         // TODO add your handling code here:
+        opcoesMed.show(cardOpcoesMedico, "removerProntuario");
+        limparCampos(getContentPane());
+        atualizarListaRemoverDados();
     }//GEN-LAST:event_botaoRemoverProntuarioActionPerformed
 
     private void botaoAtualizarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarProntuarioActionPerformed
         // TODO add your handling code here:
+        opcoesMed.show(cardOpcoesMedico, "atualizarProntuario");
+        limparCampos(getContentPane());
+        prontuarios = med.consultarProntuarios();
+        atualizarComboBoxPront();
+        atualizarCamposProntAlteracao();
     }//GEN-LAST:event_botaoAtualizarProntuarioActionPerformed
 
     private void botaoCadastrarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarProntuarioActionPerformed
@@ -1858,7 +1882,7 @@ public class UIMedico extends javax.swing.JFrame {
                 i--;
             }
         }
-        atualizarComboBoxPacProntuario();
+        atualizarComboBoxProntCadastro();
         
     }//GEN-LAST:event_botaoCadastrarProntuarioActionPerformed
 
@@ -1944,7 +1968,7 @@ public class UIMedico extends javax.swing.JFrame {
         pacientesBoxPront.removeItemAt(pacientesBoxPront.getSelectedIndex());
         
         limparCampos(getContentPane());
-        atualizarComboBoxPacProntuario();
+        atualizarComboBoxProntCadastro();
 
     }//GEN-LAST:event_botaoSalvarProntuarioActionPerformed
 
@@ -2036,10 +2060,25 @@ public class UIMedico extends javax.swing.JFrame {
 
     private void botaoAtualizaProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizaProntuarioActionPerformed
         // TODO add your handling code here:
+        Prontuario novoPront = new Prontuario();
+
+        novoPront.setDiagnosticoDoenca(atualizaDiagnosticoField.getText());
+        novoPront.setPrescricaoTratamento(atualizaPrescricaoField.getText());
+        novoPront.setSintomas(atualizaSintomasField.getText());
+      
+        novoPront.setPaciente(prontuarios.get(pacientesBoxAttProntuario.getSelectedIndex()).getPaciente());
+        novoPront.setIdProntuario(prontuarios.get(pacientesBoxAttProntuario.getSelectedIndex()).getIdProntuario());
+        
+        med.atualizarProntuario(novoPront);
+        JOptionPane.showMessageDialog(null, "Atualização realizado com sucesso");
+        
+        atualizarComboBoxPront();
+        atualizarCamposProntAlteracao();        
     }//GEN-LAST:event_botaoAtualizaProntuarioActionPerformed
 
     private void pacientesBoxAttProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxAttProntuarioActionPerformed
         // TODO add your handling code here:
+        atualizarCamposProntAlteracao();
     }//GEN-LAST:event_pacientesBoxAttProntuarioActionPerformed
 
     /**
@@ -2259,7 +2298,7 @@ public class UIMedico extends javax.swing.JFrame {
         }
     }
     
-    private void atualizarComboBoxPacProntuario() {
+    private void atualizarComboBoxProntCadastro() {
         pacientesBoxPront.removeAllItems();
         limparCampos(getContentPane());
 
@@ -2288,6 +2327,19 @@ public class UIMedico extends javax.swing.JFrame {
             atualizaAlergiasField.setText(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).getAlergias());
         }
     }  
+
+    private void atualizarCamposProntAlteracao() {
+        
+        if(pacientesBoxAttProntuario.getSelectedIndex() != -1){
+
+            prontuarios = med.consultarProntuarios();
+
+            atualizaSintomasField.setText(prontuarios.get(pacientesBoxAttProntuario.getSelectedIndex()).getSintomas());
+            atualizaDiagnosticoField.setText(prontuarios.get(pacientesBoxAttProntuario.getSelectedIndex()).getDiagnosticoDoenca());
+            atualizaPrescricaoField.setText(prontuarios.get(pacientesBoxAttProntuario.getSelectedIndex()).getPrescricaoTratamento());
+            
+        }    
+    }
 }
 
     

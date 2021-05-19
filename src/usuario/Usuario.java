@@ -1,9 +1,9 @@
 package usuario;
 
-import DAO.GenericDAO;
 import POJO.Consulta;
 import POJO.DadosAdicionais;
 import POJO.Paciente;
+import POJO.Prontuario;
 
 public class Usuario {
 
@@ -39,15 +39,15 @@ public class Usuario {
 
     }
     
-    public void cadastrarProntuario(){
+    public void cadastrarProntuario(Prontuario pront){
 
     }
     
-    public void atualizarProntuario(){
+    public void atualizarProntuario(Prontuario pront){
         
     }
     
-    public void removerProntuario(){
+    public void removerProntuario(Prontuario pront){
         
     }
     
