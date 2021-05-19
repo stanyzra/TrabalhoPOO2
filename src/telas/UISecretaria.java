@@ -2863,9 +2863,9 @@ public class UISecretaria extends javax.swing.JFrame {
         pacienteNovo.setRua(ruaField.getText());
         pacienteNovo.setEmail(emailField.getText());
         if (telField.getText().equals(""))
-        pacienteNovo.setTelefone(0);
+            pacienteNovo.setTelefone(0);
         else
-        pacienteNovo.setTelefone(Integer.parseInt(telField.getText()));
+            pacienteNovo.setTelefone(Integer.parseInt(telField.getText()));
         pacienteNovo.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
             (dataSelecionada.get(Calendar.MONTH)+1),
             dataSelecionada.get(Calendar.DAY_OF_MONTH)));

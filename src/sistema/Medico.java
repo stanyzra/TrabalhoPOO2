@@ -64,16 +64,23 @@ public class Medico extends usuario.Usuario{
         //kk o que coloca aqui...
     }
 
+    public List<DadosAdicionais> consultarDadosAdicionais(){
+        GenericDAO dao = new GenericDAO<>();
+        List<DadosAdicionais> dadosAdicionais;
+        dadosAdicionais = dao.consultar(DadosAdicionais.class);
+        return dadosAdicionais;
+    }
+    
     public List<Prontuario> consultarProntuarios(){
         GenericDAO dao = new GenericDAO<>();
         List<Prontuario> prontuario;
-        prontuario = dao.consultar(Paciente.class);
+        prontuario = dao.consultar(Prontuario.class);
         return prontuario;
     }
+    
     public Prontuario consultarUmProntuario(int id){
         GenericDAO<Prontuario> dao = new GenericDAO<>();
         Prontuario pront = dao.consultar(id, Prontuario.class);
         return pront;
     }
-    
 }

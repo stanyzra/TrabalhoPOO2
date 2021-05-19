@@ -59,6 +59,7 @@ public class UIMedico extends javax.swing.JFrame {
     
     private List<Paciente> pacientes;
     private List<Prontuario> prontuarios;
+    private List<DadosAdicionais> dadosAdicionais;
     private CheckboxGroup checkGroupDados;
     Medico med;
     /**
@@ -73,9 +74,10 @@ public class UIMedico extends javax.swing.JFrame {
         this.prontuarios = new ArrayList<>();
         this.med = new Medico();
         this.checkGroupDados = new CheckboxGroup();
+        this.dadosAdicionais = new ArrayList<>();
     }
     
-    public UIMedico(ArrayList<Paciente> pacientes, ArrayList<Prontuario> prontuarios){
+    public UIMedico(ArrayList<Paciente> pacientes, ArrayList<Prontuario> prontuarios, ArrayList<DadosAdicionais> dadosAdicionais){
         initComponents();
         menu = (CardLayout) (cardMenu.getLayout());
         this.toBarras = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -85,6 +87,7 @@ public class UIMedico extends javax.swing.JFrame {
         this.prontuarios = prontuarios;
         this.med = new Medico();
         this.checkGroupDados = new CheckboxGroup();
+        this.dadosAdicionais = dadosAdicionais;
     }
 
     /**
@@ -99,8 +102,8 @@ public class UIMedico extends javax.swing.JFrame {
         jSplitPane2 = new javax.swing.JSplitPane();
         cardMenu = new javax.swing.JPanel();
         menuMedico = new javax.swing.JPanel();
-        botaoProntuario = new javax.swing.JButton();
         botaoDadosPaciente = new javax.swing.JButton();
+        botaoProntuario = new javax.swing.JButton();
         botaoRelatorio = new javax.swing.JButton();
         voltarMainLable = new javax.swing.JLabel();
         botaoVoltarMain = new javax.swing.JButton();
@@ -144,15 +147,15 @@ public class UIMedico extends javax.swing.JFrame {
         painelCadastraDados = new javax.swing.JPanel();
         botaoCadastraDados = new javax.swing.JButton();
         atualizarDadosPaciente = new javax.swing.JPanel();
-        painelDadosPacientes = new javax.swing.JPanel();
+        painelDadosPacientesAtt = new javax.swing.JPanel();
         atualizaDadosPacientesLable = new javax.swing.JLabel();
         atualizaDadosPacientesBox = new javax.swing.JComboBox();
-        painelCadastraDadosCheckBox1 = new javax.swing.JPanel();
-        cadastraFumanteCheck1 = new javax.swing.JCheckBox();
-        cadastraBebidaCheck1 = new javax.swing.JCheckBox();
-        cadastraColesterolCheck1 = new javax.swing.JCheckBox();
-        cadastraDiabetesCheck1 = new javax.swing.JCheckBox();
-        cadastraCardiacoCheck1 = new javax.swing.JCheckBox();
+        painelAtualizaDadosCheckBox = new javax.swing.JPanel();
+        atualizaFumanteCheck = new javax.swing.JCheckBox();
+        atualizaBebidaCheck = new javax.swing.JCheckBox();
+        atualizaColesterolCheck = new javax.swing.JCheckBox();
+        atualizaDiabetesCheck = new javax.swing.JCheckBox();
+        atualizaCardiacoCheck = new javax.swing.JCheckBox();
         painelAtualizaCirurgias = new javax.swing.JPanel();
         atualizaCirurgiasField = new javax.swing.JTextField();
         atualizaCirurgiasLable = new javax.swing.JLabel();
@@ -171,7 +174,7 @@ public class UIMedico extends javax.swing.JFrame {
         cadastrarProntuario = new javax.swing.JPanel();
         painelPacientesProntuario = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        pacientesBoxCons = new javax.swing.JComboBox();
+        pacientesBoxPront = new javax.swing.JComboBox();
         painelDiagnosticoDoenca = new javax.swing.JPanel();
         diagnosticoDoencaField = new javax.swing.JTextField();
         diagnosticoDoencaLable = new javax.swing.JLabel();
@@ -213,22 +216,6 @@ public class UIMedico extends javax.swing.JFrame {
 
         menuMedico.setBackground(new java.awt.Color(204, 204, 204));
 
-        botaoProntuario.setBackground(new java.awt.Color(204, 204, 204));
-        botaoProntuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoProntuario.setForeground(new java.awt.Color(51, 51, 51));
-        botaoProntuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoProntuario.setText("Gerenciar Prontuário");
-        botaoProntuario.setBorder(null);
-        botaoProntuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoProntuario.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoProntuario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoProntuario.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoProntuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoProntuarioActionPerformed(evt);
-            }
-        });
-
         botaoDadosPaciente.setBackground(new java.awt.Color(204, 204, 204));
         botaoDadosPaciente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botaoDadosPaciente.setForeground(new java.awt.Color(51, 51, 51));
@@ -242,6 +229,22 @@ public class UIMedico extends javax.swing.JFrame {
         botaoDadosPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoDadosPacienteActionPerformed(evt);
+            }
+        });
+
+        botaoProntuario.setBackground(new java.awt.Color(204, 204, 204));
+        botaoProntuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoProntuario.setForeground(new java.awt.Color(51, 51, 51));
+        botaoProntuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoProntuario.setText("Gerenciar Prontuário");
+        botaoProntuario.setBorder(null);
+        botaoProntuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoProntuario.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoProntuario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoProntuario.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoProntuarioActionPerformed(evt);
             }
         });
 
@@ -791,12 +794,8 @@ public class UIMedico extends javax.swing.JFrame {
         painelCadastraAlergia.setLayout(painelCadastraAlergiaLayout);
         painelCadastraAlergiaLayout.setHorizontalGroup(
             painelCadastraAlergiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelCadastraAlergiaLayout.createSequentialGroup()
-                .addComponent(cadastraAlergiaLable)
-                .addGap(0, 0, 0))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCadastraAlergiaLayout.createSequentialGroup()
-                .addComponent(cadastraAlergiaField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(cadastraAlergiaLable)
+            .addComponent(cadastraAlergiaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         painelCadastraAlergiaLayout.setVerticalGroup(
             painelCadastraAlergiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -856,7 +855,6 @@ public class UIMedico extends javax.swing.JFrame {
                         .addComponent(painelCadastraDadosCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(506, 506, 506))
                     .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(painelCadastraCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(158, 158, 158)
                         .addComponent(painelCadastraAlergia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -891,7 +889,7 @@ public class UIMedico extends javax.swing.JFrame {
 
         atualizarDadosPaciente.setBackground(new java.awt.Color(51, 51, 51));
 
-        painelDadosPacientes.setBackground(new java.awt.Color(51, 51, 51));
+        painelDadosPacientesAtt.setBackground(new java.awt.Color(51, 51, 51));
 
         atualizaDadosPacientesLable.setBackground(new java.awt.Color(204, 204, 204));
         atualizaDadosPacientesLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -904,71 +902,71 @@ public class UIMedico extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout painelDadosPacientesLayout = new javax.swing.GroupLayout(painelDadosPacientes);
-        painelDadosPacientes.setLayout(painelDadosPacientesLayout);
-        painelDadosPacientesLayout.setHorizontalGroup(
-            painelDadosPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDadosPacientesLayout.createSequentialGroup()
+        javax.swing.GroupLayout painelDadosPacientesAttLayout = new javax.swing.GroupLayout(painelDadosPacientesAtt);
+        painelDadosPacientesAtt.setLayout(painelDadosPacientesAttLayout);
+        painelDadosPacientesAttLayout.setHorizontalGroup(
+            painelDadosPacientesAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDadosPacientesAttLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(atualizaDadosPacientesLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(atualizaDadosPacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        painelDadosPacientesLayout.setVerticalGroup(
-            painelDadosPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDadosPacientesLayout.createSequentialGroup()
+        painelDadosPacientesAttLayout.setVerticalGroup(
+            painelDadosPacientesAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDadosPacientesAttLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelDadosPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelDadosPacientesAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atualizaDadosPacientesLable)
                     .addComponent(atualizaDadosPacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        painelCadastraDadosCheckBox1.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaDadosCheckBox.setBackground(new java.awt.Color(51, 51, 51));
 
-        cadastraFumanteCheck1.setText("Fumante");
-        cadastraFumanteCheck1.addActionListener(new java.awt.event.ActionListener() {
+        atualizaFumanteCheck.setText("Fumante");
+        atualizaFumanteCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastraFumanteCheck1ActionPerformed(evt);
+                atualizaFumanteCheckActionPerformed(evt);
             }
         });
 
-        cadastraBebidaCheck1.setText("Consome bebidas alcoolicas");
+        atualizaBebidaCheck.setText("Consome bebidas alcoolicas");
 
-        cadastraColesterolCheck1.setText("Colesterol alto");
+        atualizaColesterolCheck.setText("Colesterol alto");
 
-        cadastraDiabetesCheck1.setText("Diabético");
+        atualizaDiabetesCheck.setText("Diabético");
 
-        cadastraCardiacoCheck1.setText("Doença Cardiaca");
+        atualizaCardiacoCheck.setText("Doença Cardiaca");
 
-        javax.swing.GroupLayout painelCadastraDadosCheckBox1Layout = new javax.swing.GroupLayout(painelCadastraDadosCheckBox1);
-        painelCadastraDadosCheckBox1.setLayout(painelCadastraDadosCheckBox1Layout);
-        painelCadastraDadosCheckBox1Layout.setHorizontalGroup(
-            painelCadastraDadosCheckBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelCadastraDadosCheckBox1Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelAtualizaDadosCheckBoxLayout = new javax.swing.GroupLayout(painelAtualizaDadosCheckBox);
+        painelAtualizaDadosCheckBox.setLayout(painelAtualizaDadosCheckBoxLayout);
+        painelAtualizaDadosCheckBoxLayout.setHorizontalGroup(
+            painelAtualizaDadosCheckBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtualizaDadosCheckBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelCadastraDadosCheckBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastraFumanteCheck1)
-                    .addComponent(cadastraBebidaCheck1)
-                    .addComponent(cadastraColesterolCheck1)
-                    .addComponent(cadastraDiabetesCheck1)
-                    .addComponent(cadastraCardiacoCheck1))
+                .addGroup(painelAtualizaDadosCheckBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(atualizaFumanteCheck)
+                    .addComponent(atualizaBebidaCheck)
+                    .addComponent(atualizaColesterolCheck)
+                    .addComponent(atualizaDiabetesCheck)
+                    .addComponent(atualizaCardiacoCheck))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        painelCadastraDadosCheckBox1Layout.setVerticalGroup(
-            painelCadastraDadosCheckBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelCadastraDadosCheckBox1Layout.createSequentialGroup()
+        painelAtualizaDadosCheckBoxLayout.setVerticalGroup(
+            painelAtualizaDadosCheckBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtualizaDadosCheckBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cadastraFumanteCheck1)
+                .addComponent(atualizaFumanteCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cadastraBebidaCheck1)
+                .addComponent(atualizaBebidaCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cadastraColesterolCheck1)
+                .addComponent(atualizaColesterolCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cadastraDiabetesCheck1)
+                .addComponent(atualizaDiabetesCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cadastraCardiacoCheck1)
+                .addComponent(atualizaCardiacoCheck)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1088,11 +1086,11 @@ public class UIMedico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
-                        .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(painelDadosPacientesAtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
                         .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(painelCadastraDadosCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, atualizarDadosPacienteLayout.createSequentialGroup()
                                 .addGap(0, 692, Short.MAX_VALUE)
                                 .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1107,9 +1105,9 @@ public class UIMedico extends javax.swing.JFrame {
             atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelDadosPacientesAtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(painelCadastraDadosCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelAtualizaCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1220,9 +1218,9 @@ public class UIMedico extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(204, 204, 204));
         jLabel21.setText("Selecione o paciente");
 
-        pacientesBoxCons.addActionListener(new java.awt.event.ActionListener() {
+        pacientesBoxPront.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pacientesBoxConsActionPerformed(evt);
+                pacientesBoxProntActionPerformed(evt);
             }
         });
 
@@ -1233,7 +1231,7 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelPacientesProntuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelPacientesProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pacientesBoxCons, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pacientesBoxPront, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelPacientesProntuarioLayout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addGap(0, 125, Short.MAX_VALUE)))
@@ -1245,7 +1243,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pacientesBoxCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pacientesBoxPront, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1609,13 +1607,9 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(atualizarProntuarioLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(atualizarProntuarioLayout.createSequentialGroup()
-                            .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 286, Short.MAX_VALUE))
-                        .addGroup(atualizarProntuarioLayout.createSequentialGroup()
-                            .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGap(143, 143, 143)
+                        .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(143, 429, Short.MAX_VALUE)
                     .addComponent(painelAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -1799,8 +1793,29 @@ public class UIMedico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoRemoverDadosActionPerformed
 
+    
+        public void atualizarComboBoxDados(){ 
+            atualizaDadosPacientesBox.removeAllItems();
+            limparCampos(getContentPane());
+            
+            if (dadosAdicionais.isEmpty()) {
+                opcoesMed.show(cardOpcoesMedico, "telaDefault");
+                JOptionPane.showMessageDialog(null, "Nenhum dado adicional cadastrado", "Atualizar Dados", JOptionPane.WARNING_MESSAGE);
+            }else{
+                dadosAdicionais.forEach(itens -> {
+                atualizaDadosPacientesBox.addItem(itens.getPaciente().getNome());
+            });     
+            atualizarCamposAlteracaoDados();
+        }
+    }
+    
     private void botaoAtualizarDadosPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarDadosPacienteActionPerformed
-        atualizarComboBoxPacientes(atualizaDadosPacientesBox,"atualizarPaciente");
+        limparCampos(getContentPane());
+        opcoesMed.show(cardOpcoesMedico, "atualizarDadosPaciente");
+        dadosAdicionais = med.consultarDadosAdicionais();
+        
+        atualizarComboBoxDados();
+        atualizarCamposAlteracaoDados();
     }//GEN-LAST:event_botaoAtualizarDadosPacienteActionPerformed
 
     private void botaoCadastrarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarDadosActionPerformed
@@ -1809,12 +1824,7 @@ public class UIMedico extends javax.swing.JFrame {
         pacientes = med.consultarPaciente();
 
         for (int i = 0; i < pacientes.size(); i++) {
-            System.out.println("dados: "+pacientes.get(i).isDadosAdicionaisCadastrado());
-            System.out.println("pacientes: "+pacientes.get(i).getNome());
-            System.out.println("i: "+i);
             if (pacientes.get(i).isDadosAdicionaisCadastrado()) {
-                System.out.println(i);
-                System.out.println("entrou: "+pacientes.get(i).getNome());
                 pacientes.remove(i);
                 i--;
             }
@@ -1838,23 +1848,19 @@ public class UIMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAtualizarProntuarioActionPerformed
 
     private void botaoCadastrarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarProntuarioActionPerformed
-        // TODO add your handling code here:
-//        opcoesMed.show(cardOpcoesMedico, "cadastrarDados");
-//        limparCampos(getContentPane());
-//        pacientes = med.consultarPaciente();
-//
-//        for (int i = 0; i < pacientes.size(); i++) {
-//            System.out.println("dados: "+pacientes.get(i).isDadosAdicionaisCadastrado());
-//            System.out.println("pacientes: "+pacientes.get(i).getNome());
-//            System.out.println("i: "+i);
-//            if (pacientes.get(i).isDadosAdicionaisCadastrado()) {
-//                System.out.println(i);
-//                System.out.println("entrou: "+pacientes.get(i).getNome());
-//                pacientes.remove(i);
-//                i--;
-//            }
-//        }
-//        atualizarComboBoxPacDados();
+        opcoesMed.show(cardOpcoesMedico, "cadastrarProntuario");
+        
+        limparCampos(getContentPane());
+        pacientes = med.consultarPaciente();
+
+        for (int i = 0; i < pacientes.size(); i++) {
+            if (pacientes.get(i).isProntuarioCadastrado()) {
+                pacientes.remove(i);
+                i--;
+            }
+        }
+        atualizarComboBoxPacProntuario();
+        
     }//GEN-LAST:event_botaoCadastrarProntuarioActionPerformed
 
     private void atualizaDadosPacientesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaDadosPacientesBoxActionPerformed
@@ -1866,27 +1872,32 @@ public class UIMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_atualizaCirurgiasFieldActionPerformed
 
     private void botaoAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarDadosActionPerformed
-//        // TODO add your handling code here:
-//
-//        Calendar dataSelecionada = atualizaDataNascCalendar.getCalendar();
-//
-//        Paciente dadosAtualizados = new Paciente();
-//
-//        dadosAtualizados.setNome(atualizaNomeField.getText());
-//        dadosAtualizados.setTelefone(Integer.parseInt(atualizaTelField.getText()));
-//        dadosAtualizados.setBairro(atualizaCirurgiasField.getText());
-//        dadosAtualizados.setCidade(atualizaCidadeField.getText());
-//        dadosAtualizados.setRua(atualizaRuaField.getText());
-//        dadosAtualizados.setTipoPlano(grupoAtualizarConvenio.getSelection().getActionCommand());
-//        dadosAtualizados.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
-//            (dataSelecionada.get(Calendar.MONTH)),
-//            dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-//    dadosAtualizados.setIdPaciente(pacientes.get(atualizaDadosPacientesBox.getSelectedIndex()).getIdPaciente());
-//
-//    sec.atualizarPaciente(dadosAtualizados);
-//    JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
-//    atualizarComboBoxPacientes(atualizaDadosPacientesBox, "atualizarPaciente");
-//    atualizarCamposAlteracao();
+        ///////////////////////////////////////////////////////////
+        //                  ATUALIZA DADOS                      //
+        /////////////////////////////////////////////////////////
+        
+        DadosAdicionais dadosAtualizados = new DadosAdicionais();
+
+        if(atualizaFumanteCheck.isSelected()) dadosAtualizados.setFuma(true);
+        else dadosAtualizados.setFuma(false);
+        if(atualizaBebidaCheck.isSelected()) dadosAtualizados.setBebe(true);
+        else dadosAtualizados.setBebe(false);
+        if(atualizaColesterolCheck.isSelected()) dadosAtualizados.setColesterol(true);
+        else dadosAtualizados.setColesterol(false);
+        if(atualizaDiabetesCheck.isSelected()) dadosAtualizados.setDiabete(true);
+        else dadosAtualizados.setDiabete(false);
+        if(atualizaCardiacoCheck.isSelected()) dadosAtualizados.setDoencaCard(true);
+        else dadosAtualizados.setDoencaCard(false);
+        dadosAtualizados.setCirurgias(atualizaCirurgiasField.getText());
+        dadosAtualizados.setAlergias(atualizaAlergiasField.getText());
+        
+        dadosAtualizados.setIdDadosAdicionais(dadosAdicionais.get(pacientesDadosBox.getSelectedIndex()).getIdDadosAdicionais());
+        med.atualizarDadosPaciente(dadosAtualizados);
+        JOptionPane.showMessageDialog(null, "Atualização realizado com sucesso");
+        pacientes.remove(pacientesDadosBox.getSelectedIndex());
+        
+        atualizarComboBoxPacAttDados();
+        atualizarCamposAlteracaoDados();
     }//GEN-LAST:event_botaoAtualizarDadosActionPerformed
 
     private void botaoRemoverPacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverPacActionPerformed
@@ -1904,34 +1915,34 @@ public class UIMedico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoRemoverPacActionPerformed
 
-    private void pacientesBoxConsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxConsActionPerformed
+    private void pacientesBoxProntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxProntActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pacientesBoxConsActionPerformed
+    }//GEN-LAST:event_pacientesBoxProntActionPerformed
 
     private void botaoSalvarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarProntuarioActionPerformed
-//        // TODO add your handling code here:
-//        Calendar dataSelecionada = dataConsCalendar.getCalendar();
-//
-//        grupoTipoConsulta.add(radioNormal);
-//        grupoTipoConsulta.add(radioRetorno);
-//
-//        Consulta novaCons = new Consulta();
-//
-//        System.out.println(pacientes.get(pacientesBoxCons.getSelectedIndex()).getIdPaciente());
-//        novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
-//        novaCons.setConsultaNormal(grupoTipoConsulta.getSelection().getActionCommand());
-//        novaCons.setHorario(Integer.parseInt(diagnosticoDoencaField.getText()));
-//        novaCons.setMedico(sintomasField.getText());
-//        novaCons.setLocalDateCons(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
-//            (dataSelecionada.get(Calendar.MONTH)+1),
-//            dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-//    System.out.println("antes: "+novaCons.getPaciente().isConsultaCadastrada());
-//    novaCons.getPaciente().setConsultaCadastrada(true);
-//    System.out.println("depois : "+novaCons.getPaciente().isConsultaCadastrada());
-//
-//    pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
-//
-//    sec.cadastrarConsulta(novaCons);
+        ///////////////////////////////////////////////////////////
+        //                 CADASTRA PRONTUARIO                  //
+        /////////////////////////////////////////////////////////
+        
+        Prontuario prontNovo = new Prontuario();
+
+
+        prontNovo.setSintomas(sintomasField.getText());
+        prontNovo.setDiagnosticoDoenca(diagnosticoDoencaField.getText());
+        prontNovo.setPrescricaoTratamento(prescricaoTratamentoField.getText());
+        
+        pacientes.get(pacientesBoxPront.getSelectedIndex()).setProntuario(prontNovo);
+        prontNovo.setPaciente(pacientes.get(pacientesBoxPront.getSelectedIndex()));
+        prontNovo.getPaciente().setProntuarioCadastrado(true);
+
+        med.cadastrarProntuario(prontNovo);
+        med.atualizarPaciente(pacientes.get(pacientesBoxPront.getSelectedIndex()));
+        JOptionPane.showMessageDialog(null, "Cadastro de dados realizado com sucesso");
+        pacientes.remove(pacientesBoxPront.getSelectedIndex());
+        pacientesBoxPront.removeItemAt(pacientesBoxPront.getSelectedIndex());
+        
+        limparCampos(getContentPane());
+        atualizarComboBoxPacProntuario();
 
     }//GEN-LAST:event_botaoSalvarProntuarioActionPerformed
 
@@ -1965,6 +1976,11 @@ public class UIMedico extends javax.swing.JFrame {
 
     private void botaoCadastraDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraDadosActionPerformed
 
+        ///////////////////////////////////////////////////////////
+        //                    CADASTRA DADOS                    //
+        /////////////////////////////////////////////////////////        
+        
+        
         DadosAdicionais dadoNovo = new DadosAdicionais();
         
         
@@ -2011,9 +2027,9 @@ public class UIMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cadastraFumanteCheckActionPerformed
 
-    private void cadastraFumanteCheck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraFumanteCheck1ActionPerformed
+    private void atualizaFumanteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaFumanteCheckActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cadastraFumanteCheck1ActionPerformed
+    }//GEN-LAST:event_atualizaFumanteCheckActionPerformed
 
     private void botaoAtualizaProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizaProntuarioActionPerformed
         // TODO add your handling code here:
@@ -2061,12 +2077,17 @@ public class UIMedico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField atualizaAlergiasField;
     private javax.swing.JLabel atualizaAlergiasLable;
+    private javax.swing.JCheckBox atualizaBebidaCheck;
+    private javax.swing.JCheckBox atualizaCardiacoCheck;
     private javax.swing.JTextField atualizaCirurgiasField;
     private javax.swing.JLabel atualizaCirurgiasLable;
+    private javax.swing.JCheckBox atualizaColesterolCheck;
     private javax.swing.JComboBox atualizaDadosPacientesBox;
     private javax.swing.JLabel atualizaDadosPacientesLable;
+    private javax.swing.JCheckBox atualizaDiabetesCheck;
     private javax.swing.JTextField atualizaDiagnosticoField;
     private javax.swing.JLabel atualizaDiagnosticoLable;
+    private javax.swing.JCheckBox atualizaFumanteCheck;
     private javax.swing.JTextField atualizaPrescricaoField;
     private javax.swing.JLabel atualizaPrescricaoLable;
     private javax.swing.JTextField atualizaSintomasField;
@@ -2099,17 +2120,12 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JTextField cadastraAlergiaField;
     private javax.swing.JLabel cadastraAlergiaLable;
     private javax.swing.JCheckBox cadastraBebidaCheck;
-    private javax.swing.JCheckBox cadastraBebidaCheck1;
     private javax.swing.JCheckBox cadastraCardiacoCheck;
-    private javax.swing.JCheckBox cadastraCardiacoCheck1;
     private javax.swing.JTextField cadastraCirurgiasField;
     private javax.swing.JLabel cadastraCirurgiasLabel;
     private javax.swing.JCheckBox cadastraColesterolCheck;
-    private javax.swing.JCheckBox cadastraColesterolCheck1;
     private javax.swing.JCheckBox cadastraDiabetesCheck;
-    private javax.swing.JCheckBox cadastraDiabetesCheck1;
     private javax.swing.JCheckBox cadastraFumanteCheck;
-    private javax.swing.JCheckBox cadastraFumanteCheck1;
     private javax.swing.JPanel cadastrarDadosPaciente;
     private javax.swing.JPanel cadastrarProntuario;
     private javax.swing.JPanel cardMenu;
@@ -2129,12 +2145,13 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JPanel menuGerenciarRelatorios;
     private javax.swing.JPanel menuMedico;
     private javax.swing.JComboBox pacientesBoxAttProntuario;
-    private javax.swing.JComboBox pacientesBoxCons;
+    private javax.swing.JComboBox pacientesBoxPront;
     private javax.swing.JComboBox pacientesDadosBox;
     private javax.swing.JLabel pacientesLableAttProntuario;
     private javax.swing.JPanel paineSintomas;
     private javax.swing.JPanel painelAtualizaAlergias;
     private javax.swing.JPanel painelAtualizaCirurgias;
+    private javax.swing.JPanel painelAtualizaDadosCheckBox;
     private javax.swing.JPanel painelAtualizaDiagnostico;
     private javax.swing.JPanel painelAtualizaPrescricao;
     private javax.swing.JPanel painelAtualizaSintomas;
@@ -2144,8 +2161,7 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JPanel painelCadastraCirurgias;
     private javax.swing.JPanel painelCadastraDados;
     private javax.swing.JPanel painelCadastraDadosCheckBox;
-    private javax.swing.JPanel painelCadastraDadosCheckBox1;
-    private javax.swing.JPanel painelDadosPacientes;
+    private javax.swing.JPanel painelDadosPacientesAtt;
     private javax.swing.JPanel painelDiagnosticoDoenca;
     private javax.swing.JPanel painelExcluirDadosPaciente;
     private javax.swing.JPanel painelExcluirProntuario;
@@ -2212,10 +2228,6 @@ public class UIMedico extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void atualizarCamposAlteracaoDados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     private void atualizarComboBoxPacDados() {
         pacientesDadosBox.removeAllItems();
         limparCampos(getContentPane());
@@ -2229,4 +2241,50 @@ public class UIMedico extends javax.swing.JFrame {
             });
         }
     }
+    
+        private void atualizarComboBoxPacAttDados() {
+        pacientesDadosBox.removeAllItems();
+        limparCampos(getContentPane());
+
+        if (dadosAdicionais.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Cadastrar dados", JOptionPane.WARNING_MESSAGE);
+        }else {
+            dadosAdicionais.forEach(pac -> {
+                pacientesDadosBox.addItem(pac.getPaciente().getNome());
+            });
+        }
+    }
+    
+    private void atualizarComboBoxPacProntuario() {
+        pacientesBoxPront.removeAllItems();
+        limparCampos(getContentPane());
+
+        if (pacientes.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado", "Cadastrar prontuarios", JOptionPane.WARNING_MESSAGE);
+        }else {
+            pacientes.forEach(pac -> {
+                pacientesBoxPront.addItem(pac.getNome());
+            });
+        }
+    }
+    
+    public void atualizarCamposAlteracaoDados(){
+        
+        if(atualizaDadosPacientesBox.getSelectedIndex() != -1){
+
+            dadosAdicionais = med.consultarDadosAdicionais();
+            
+            atualizaFumanteCheck.setSelected(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).isFuma());
+            atualizaBebidaCheck.setSelected(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).isBebe());
+            atualizaColesterolCheck.setSelected(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).isColesterol());
+            atualizaDiabetesCheck.setSelected(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).isDiabete());
+            atualizaCardiacoCheck.setSelected(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).isDoencaCard());
+            atualizaCirurgiasField.setText(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).getCirurgias());
+            atualizaAlergiasField.setText(dadosAdicionais.get(atualizaDadosPacientesBox.getSelectedIndex()).getAlergias());
+        }
+    }  
 }
+
+    
