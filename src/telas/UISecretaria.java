@@ -5,7 +5,6 @@
  */
 package telas;
 
-
 import DAO.GenericDAO;
 import POJO.Consulta;
 import POJO.Paciente;
