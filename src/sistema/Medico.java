@@ -70,6 +70,11 @@ public class Medico extends usuario.Usuario{
         dadosAdicionais = dao.consultar(DadosAdicionais.class);
         return dadosAdicionais;
     }
+    public DadosAdicionais consultarUmDado(int id){
+        GenericDAO<DadosAdicionais> dao = new GenericDAO<>();
+        DadosAdicionais dados = dao.consultar(id, DadosAdicionais.class);
+        return dados;
+    }
     
     public List<Prontuario> consultarProntuarios(){
         GenericDAO dao = new GenericDAO<>();

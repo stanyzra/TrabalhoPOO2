@@ -1,5 +1,6 @@
 package usuario;
 
+import DAO.GenericDAO;
 import POJO.Consulta;
 import POJO.DadosAdicionais;
 import POJO.Paciente;
@@ -36,7 +37,8 @@ public class Usuario {
     }
     
     public void removerDadosPaciente(DadosAdicionais dados){
-
+        GenericDAO dao = new GenericDAO<>();
+        dao.excluir(dados.getIdDadosAdicionais(), dados.getClass());
     }
     
     public void cadastrarProntuario(Prontuario pront){
@@ -48,7 +50,8 @@ public class Usuario {
     }
     
     public void removerProntuario(Prontuario pront){
-        
+        GenericDAO dao = new GenericDAO<>();
+        dao.excluir(pront.getIdProntuario(), pront.getClass());
     }
     
     public void gerarRelatorioMedico(){

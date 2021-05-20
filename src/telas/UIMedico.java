@@ -16,6 +16,7 @@ import java.awt.CardLayout;
 import java.awt.CheckboxGroup;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -75,6 +76,7 @@ public class UIMedico extends javax.swing.JFrame {
         this.med = new Medico();
         this.checkGroupDados = new CheckboxGroup();
         this.dadosAdicionais = new ArrayList<>();
+        setSize(new Dimension(804, 600));
     }
     
     public UIMedico(ArrayList<Paciente> pacientes, ArrayList<Prontuario> prontuarios, ArrayList<DadosAdicionais> dadosAdicionais){
@@ -88,6 +90,7 @@ public class UIMedico extends javax.swing.JFrame {
         this.med = new Medico();
         this.checkGroupDados = new CheckboxGroup();
         this.dadosAdicionais = dadosAdicionais;
+        setSize(new Dimension(804, 600));
     }
 
     /**
@@ -168,9 +171,9 @@ public class UIMedico extends javax.swing.JFrame {
         painelExcluirDadosPaciente = new javax.swing.JPanel();
         excluirDadosLable = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaPacientes = new javax.swing.JList<>();
+        listaDados = new javax.swing.JList<>();
         painelRemoverDados = new javax.swing.JPanel();
-        botaoRemoverPac = new javax.swing.JButton();
+        botaoRemoverDadosAdc = new javax.swing.JButton();
         cadastrarProntuario = new javax.swing.JPanel();
         painelPacientesProntuario = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
@@ -205,7 +208,7 @@ public class UIMedico extends javax.swing.JFrame {
         painelExcluirProntuario = new javax.swing.JPanel();
         excluirProntuarioLable = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listaPacientes1 = new javax.swing.JList<>();
+        listaPront = new javax.swing.JList<>();
         painelRemoverProntuario = new javax.swing.JPanel();
         botaoRemoverPront = new javax.swing.JButton();
 
@@ -652,7 +655,7 @@ public class UIMedico extends javax.swing.JFrame {
         telaDefault.setLayout(telaDefaultLayout);
         telaDefaultLayout.setHorizontalGroup(
             telaDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
+            .addGap(0, 1114, Short.MAX_VALUE)
         );
         telaDefaultLayout.setVerticalGroup(
             telaDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -683,7 +686,7 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelSelecionarPacienteDadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(selecionarPacienteDadosLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pacientesDadosBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -726,7 +729,7 @@ public class UIMedico extends javax.swing.JFrame {
                     .addComponent(cadastraColesterolCheck)
                     .addComponent(cadastraDiabetesCheck)
                     .addComponent(cadastraCardiacoCheck))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         painelCadastraDadosCheckBoxLayout.setVerticalGroup(
             painelCadastraDadosCheckBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,6 +748,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelCadastraCirurgias.setBackground(new java.awt.Color(51, 51, 51));
+        painelCadastraCirurgias.setPreferredSize(new java.awt.Dimension(76, 55));
 
         cadastraCirurgiasLabel.setBackground(new java.awt.Color(204, 204, 204));
         cadastraCirurgiasLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -772,10 +776,12 @@ public class UIMedico extends javax.swing.JFrame {
                 .addComponent(cadastraCirurgiasLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cadastraCirurgiasField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         painelCadastraAlergia.setBackground(new java.awt.Color(51, 51, 51));
+        painelCadastraAlergia.setPreferredSize(new java.awt.Dimension(76, 55));
+        painelCadastraAlergia.setRequestFocusEnabled(false);
 
         cadastraAlergiaLable.setBackground(new java.awt.Color(204, 204, 204));
         cadastraAlergiaLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -794,17 +800,20 @@ public class UIMedico extends javax.swing.JFrame {
         painelCadastraAlergia.setLayout(painelCadastraAlergiaLayout);
         painelCadastraAlergiaLayout.setHorizontalGroup(
             painelCadastraAlergiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cadastraAlergiaLable)
-            .addComponent(cadastraAlergiaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(painelCadastraAlergiaLayout.createSequentialGroup()
+                .addGroup(painelCadastraAlergiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cadastraAlergiaLable)
+                    .addComponent(cadastraAlergiaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         painelCadastraAlergiaLayout.setVerticalGroup(
             painelCadastraAlergiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastraAlergiaLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(cadastraAlergiaLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cadastraAlergiaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         painelCadastraDados.setBackground(new java.awt.Color(51, 51, 51));
@@ -848,41 +857,32 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarDadosPacienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(painelCadastraDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
-                        .addComponent(painelCadastraDadosCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(506, 506, 506))
-                    .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
-                        .addComponent(painelCadastraCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158)
-                        .addComponent(painelCadastraAlergia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(111, 111, 111)))
-                .addGap(45, 45, 45))
-            .addGroup(cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
-                    .addContainerGap()
+                    .addComponent(painelCadastraDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelSelecionarPacienteDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(553, Short.MAX_VALUE)))
+                    .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
+                        .addComponent(painelCadastraCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(painelCadastraAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarDadosPacienteLayout.createSequentialGroup()
+                .addContainerGap(636, Short.MAX_VALUE)
+                .addComponent(painelCadastraDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(348, Short.MAX_VALUE))
         );
         cadastrarDadosPacienteLayout.setVerticalGroup(
             cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cadastrarDadosPacienteLayout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(42, 42, 42)
+                .addComponent(painelSelecionarPacienteDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(painelCadastraDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelCadastraCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelCadastraAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addComponent(painelCadastraDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
-            .addGroup(cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarDadosPacienteLayout.createSequentialGroup()
-                    .addContainerGap(34, Short.MAX_VALUE)
-                    .addComponent(painelSelecionarPacienteDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(484, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         cardOpcoesMedico.add(cadastrarDadosPaciente, "cadastrarDadosPaciente");
@@ -890,6 +890,7 @@ public class UIMedico extends javax.swing.JFrame {
         atualizarDadosPaciente.setBackground(new java.awt.Color(51, 51, 51));
 
         painelDadosPacientes.setBackground(new java.awt.Color(51, 51, 51));
+        painelDadosPacientes.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaDadosPacientesLable.setBackground(new java.awt.Color(204, 204, 204));
         atualizaDadosPacientesLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -909,9 +910,9 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelDadosPacientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(atualizaDadosPacientesLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(atualizaDadosPacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         painelDadosPacientesLayout.setVerticalGroup(
             painelDadosPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,7 +921,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(painelDadosPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atualizaDadosPacientesLable)
                     .addComponent(atualizaDadosPacientesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         painelAtualizaDadosCheckBox.setBackground(new java.awt.Color(51, 51, 51));
@@ -952,7 +953,7 @@ public class UIMedico extends javax.swing.JFrame {
                     .addComponent(atualizaColesterolCheck)
                     .addComponent(atualizaDiabetesCheck)
                     .addComponent(atualizaCardiacoCheck))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         painelAtualizaDadosCheckBoxLayout.setVerticalGroup(
             painelAtualizaDadosCheckBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -971,6 +972,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelAtualizaCirurgias.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaCirurgias.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaCirurgiasField.setBackground(new java.awt.Color(255, 255, 255));
         atualizaCirurgiasField.setForeground(new java.awt.Color(51, 51, 51));
@@ -992,7 +994,7 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelAtualizaCirurgiasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelAtualizaCirurgiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atualizaCirurgiasField, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(atualizaCirurgiasField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(painelAtualizaCirurgiasLayout.createSequentialGroup()
                         .addComponent(atualizaCirurgiasLable)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1009,6 +1011,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelAtualizaAlergias.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaAlergias.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaAlergiasField.setBackground(new java.awt.Color(255, 255, 255));
         atualizaAlergiasField.setForeground(new java.awt.Color(51, 51, 51));
@@ -1029,9 +1032,9 @@ public class UIMedico extends javax.swing.JFrame {
             painelAtualizaAlergiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAtualizaAlergiasLayout.createSequentialGroup()
                 .addComponent(atualizaAlergiasLable)
-                .addGap(0, 221, Short.MAX_VALUE))
+                .addGap(0, 216, Short.MAX_VALUE))
             .addGroup(painelAtualizaAlergiasLayout.createSequentialGroup()
-                .addComponent(atualizaAlergiasField, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addComponent(atualizaAlergiasField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelAtualizaAlergiasLayout.setVerticalGroup(
@@ -1084,35 +1087,29 @@ public class UIMedico extends javax.swing.JFrame {
             atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
-                        .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
-                        .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, atualizarDadosPacienteLayout.createSequentialGroup()
-                                .addGap(0, 692, Short.MAX_VALUE)
-                                .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
-                                .addComponent(painelAtualizaCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
-                                .addComponent(painelAtualizaAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
+                            .addComponent(painelAtualizaCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(painelAtualizaAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         atualizarDadosPacienteLayout.setVerticalGroup(
             atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelDadosPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelAtualizaCirurgias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelAtualizaAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
                 .addComponent(painelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1128,23 +1125,23 @@ public class UIMedico extends javax.swing.JFrame {
         excluirDadosLable.setForeground(new java.awt.Color(204, 204, 204));
         excluirDadosLable.setText("Selecione o paciente que deseja excluir os dados:");
 
-        jScrollPane1.setViewportView(listaPacientes);
+        jScrollPane1.setViewportView(listaDados);
 
         painelRemoverDados.setBackground(new java.awt.Color(51, 51, 51));
 
-        botaoRemoverPac.setBackground(new java.awt.Color(204, 204, 204));
-        botaoRemoverPac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoRemoverPac.setForeground(new java.awt.Color(51, 51, 51));
-        botaoRemoverPac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoRemoverPac.setText("Remover");
-        botaoRemoverPac.setBorder(null);
-        botaoRemoverPac.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoRemoverPac.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoRemoverPac.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoRemoverPac.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoRemoverPac.addActionListener(new java.awt.event.ActionListener() {
+        botaoRemoverDadosAdc.setBackground(new java.awt.Color(204, 204, 204));
+        botaoRemoverDadosAdc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoRemoverDadosAdc.setForeground(new java.awt.Color(51, 51, 51));
+        botaoRemoverDadosAdc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoRemoverDadosAdc.setText("Remover");
+        botaoRemoverDadosAdc.setBorder(null);
+        botaoRemoverDadosAdc.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoRemoverDadosAdc.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoRemoverDadosAdc.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoRemoverDadosAdc.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoRemoverDadosAdc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoRemoverPacActionPerformed(evt);
+                botaoRemoverDadosAdcActionPerformed(evt);
             }
         });
 
@@ -1154,13 +1151,13 @@ public class UIMedico extends javax.swing.JFrame {
             painelRemoverDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRemoverDadosLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaoRemoverPac, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botaoRemoverDadosAdc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         painelRemoverDadosLayout.setVerticalGroup(
             painelRemoverDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelRemoverDadosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoRemoverPac, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoRemoverDadosAdc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1170,14 +1167,12 @@ public class UIMedico extends javax.swing.JFrame {
             painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelExcluirDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(painelExcluirDadosPacienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(painelRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelExcluirDadosPacienteLayout.createSequentialGroup()
+                .addGroup(painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(excluirDadosLable)
-                        .addGap(0, 538, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 564, Short.MAX_VALUE))
         );
         painelExcluirDadosPacienteLayout.setVerticalGroup(
             painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1186,7 +1181,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addComponent(excluirDadosLable)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(painelRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1212,6 +1207,7 @@ public class UIMedico extends javax.swing.JFrame {
         cadastrarProntuario.setBackground(new java.awt.Color(51, 51, 51));
 
         painelPacientesProntuario.setBackground(new java.awt.Color(51, 51, 51));
+        painelPacientesProntuario.setPreferredSize(new java.awt.Dimension(76, 55));
 
         jLabel21.setBackground(new java.awt.Color(204, 204, 204));
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1234,7 +1230,7 @@ public class UIMedico extends javax.swing.JFrame {
                     .addComponent(pacientesBoxPront, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelPacientesProntuarioLayout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addGap(0, 125, Short.MAX_VALUE)))
+                        .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelPacientesProntuarioLayout.setVerticalGroup(
@@ -1248,6 +1244,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelDiagnosticoDoenca.setBackground(new java.awt.Color(51, 51, 51));
+        painelDiagnosticoDoenca.setPreferredSize(new java.awt.Dimension(76, 55));
 
         diagnosticoDoencaField.setBackground(new java.awt.Color(255, 255, 255));
         diagnosticoDoencaField.setForeground(new java.awt.Color(51, 51, 51));
@@ -1264,10 +1261,10 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelDiagnosticoDoencaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelDiagnosticoDoencaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(diagnosticoDoencaField, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(diagnosticoDoencaField)
                     .addGroup(painelDiagnosticoDoencaLayout.createSequentialGroup()
                         .addComponent(diagnosticoDoencaLable)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelDiagnosticoDoencaLayout.setVerticalGroup(
@@ -1281,6 +1278,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         paineSintomas.setBackground(new java.awt.Color(51, 51, 51));
+        paineSintomas.setPreferredSize(new java.awt.Dimension(76, 55));
 
         sintomasField.setBackground(new java.awt.Color(255, 255, 255));
         sintomasField.setForeground(new java.awt.Color(51, 51, 51));
@@ -1297,10 +1295,10 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(paineSintomasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paineSintomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sintomasField)
+                    .addComponent(sintomasField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(paineSintomasLayout.createSequentialGroup()
                         .addComponent(sintomasLable)
-                        .addGap(0, 200, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         paineSintomasLayout.setVerticalGroup(
@@ -1314,6 +1312,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelPrescricaoTratamento.setBackground(new java.awt.Color(51, 51, 51));
+        painelPrescricaoTratamento.setPreferredSize(new java.awt.Dimension(76, 55));
 
         prescricaoTratamentoLable.setBackground(new java.awt.Color(204, 204, 204));
         prescricaoTratamentoLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1332,7 +1331,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(painelPrescricaoTratamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelPrescricaoTratamentoLayout.createSequentialGroup()
                         .addComponent(prescricaoTratamentoLable)
-                        .addGap(0, 108, Short.MAX_VALUE))
+                        .addGap(0, 114, Short.MAX_VALUE))
                     .addComponent(prescricaoTratamentoField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -1386,23 +1385,18 @@ public class UIMedico extends javax.swing.JFrame {
             cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
-                        .addComponent(painelDiagnosticoDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
-                                .addComponent(painelSalvarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
-                                .addGap(146, 146, 146)
-                                .addComponent(painelPrescricaoTratamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
-                        .addComponent(painelPacientesProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(146, 146, 146)
-                        .addComponent(paineSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelSalvarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
+                            .addComponent(painelDiagnosticoDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(painelPrescricaoTratamento, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(cadastrarProntuarioLayout.createSequentialGroup()
+                            .addComponent(painelPacientesProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(paineSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 568, Short.MAX_VALUE))
         );
         cadastrarProntuarioLayout.setVerticalGroup(
             cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1415,7 +1409,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelPrescricaoTratamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelDiagnosticoDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 332, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
                 .addComponent(painelSalvarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1425,6 +1419,7 @@ public class UIMedico extends javax.swing.JFrame {
         atualizarProntuario.setBackground(new java.awt.Color(51, 51, 51));
 
         painelPacientesAttProntuario.setBackground(new java.awt.Color(51, 51, 51));
+        painelPacientesAttProntuario.setPreferredSize(new java.awt.Dimension(76, 55));
 
         pacientesLableAttProntuario.setBackground(new java.awt.Color(204, 204, 204));
         pacientesLableAttProntuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1447,7 +1442,7 @@ public class UIMedico extends javax.swing.JFrame {
                     .addComponent(pacientesBoxAttProntuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelPacientesAttProntuarioLayout.createSequentialGroup()
                         .addComponent(pacientesLableAttProntuario)
-                        .addGap(0, 125, Short.MAX_VALUE)))
+                        .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelPacientesAttProntuarioLayout.setVerticalGroup(
@@ -1461,6 +1456,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelAtualizaDiagnostico.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaDiagnostico.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaDiagnosticoField.setBackground(new java.awt.Color(255, 255, 255));
         atualizaDiagnosticoField.setForeground(new java.awt.Color(51, 51, 51));
@@ -1477,10 +1473,10 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelAtualizaDiagnosticoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelAtualizaDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atualizaDiagnosticoField, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(atualizaDiagnosticoField)
                     .addGroup(painelAtualizaDiagnosticoLayout.createSequentialGroup()
                         .addComponent(atualizaDiagnosticoLable)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelAtualizaDiagnosticoLayout.setVerticalGroup(
@@ -1494,6 +1490,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelAtualizaSintomas.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaSintomas.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaSintomasField.setBackground(new java.awt.Color(255, 255, 255));
         atualizaSintomasField.setForeground(new java.awt.Color(51, 51, 51));
@@ -1510,10 +1507,10 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelAtualizaSintomasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelAtualizaSintomasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atualizaSintomasField)
+                    .addComponent(atualizaSintomasField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(painelAtualizaSintomasLayout.createSequentialGroup()
                         .addComponent(atualizaSintomasLable)
-                        .addGap(0, 200, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelAtualizaSintomasLayout.setVerticalGroup(
@@ -1527,6 +1524,7 @@ public class UIMedico extends javax.swing.JFrame {
         );
 
         painelAtualizaPrescricao.setBackground(new java.awt.Color(51, 51, 51));
+        painelAtualizaPrescricao.setPreferredSize(new java.awt.Dimension(76, 55));
 
         atualizaPrescricaoLable.setBackground(new java.awt.Color(204, 204, 204));
         atualizaPrescricaoLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1545,7 +1543,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(painelAtualizaPrescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelAtualizaPrescricaoLayout.createSequentialGroup()
                         .addComponent(atualizaPrescricaoLable)
-                        .addGap(0, 108, Short.MAX_VALUE))
+                        .addGap(0, 114, Short.MAX_VALUE))
                     .addComponent(atualizaPrescricaoField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -1598,38 +1596,35 @@ public class UIMedico extends javax.swing.JFrame {
         atualizarProntuarioLayout.setHorizontalGroup(
             atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarProntuarioLayout.createSequentialGroup()
-                .addContainerGap(412, Short.MAX_VALUE)
-                .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelAtualizaPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(painelAtualizaSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(161, 161, 161))
-            .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(atualizarProntuarioLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(143, 429, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(painelAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addGroup(atualizarProntuarioLayout.createSequentialGroup()
+                        .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelAtualizaSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(painelAtualizaPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         atualizarProntuarioLayout.setVerticalGroup(
             atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(atualizarProntuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelAtualizaSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(painelAtualizaPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(408, Short.MAX_VALUE))
-            .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(atualizarProntuarioLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 332, Short.MAX_VALUE)
-                    .addComponent(painelAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(atualizarProntuarioLayout.createSequentialGroup()
+                        .addComponent(painelAtualizaSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(painelAtualizaPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(atualizarProntuarioLayout.createSequentialGroup()
+                        .addComponent(painelPacientesAttProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(painelAtualizaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
+                .addComponent(painelAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         cardOpcoesMedico.add(atualizarProntuario, "atualizarProntuario");
@@ -1641,9 +1636,9 @@ public class UIMedico extends javax.swing.JFrame {
         excluirProntuarioLable.setBackground(new java.awt.Color(204, 204, 204));
         excluirProntuarioLable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirProntuarioLable.setForeground(new java.awt.Color(204, 204, 204));
-        excluirProntuarioLable.setText("Selecione o prontuário que deseja excluir:");
+        excluirProntuarioLable.setText("Selecione o paciente em que deseja excluir o prontuário:");
 
-        jScrollPane2.setViewportView(listaPacientes1);
+        jScrollPane2.setViewportView(listaPront);
 
         painelRemoverProntuario.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -1686,13 +1681,11 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(painelExcluirProntuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(painelExcluirProntuarioLayout.createSequentialGroup()
-                        .addComponent(excluirProntuarioLable, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(552, Short.MAX_VALUE))
-                    .addGroup(painelExcluirProntuarioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(painelRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(painelRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(excluirProntuarioLable))
+                .addGap(0, 564, Short.MAX_VALUE))
         );
         painelExcluirProntuarioLayout.setVerticalGroup(
             painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1701,7 +1694,7 @@ public class UIMedico extends javax.swing.JFrame {
                 .addComponent(excluirProntuarioLable)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(painelRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1730,7 +1723,7 @@ public class UIMedico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+            .addComponent(jSplitPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1858,7 +1851,7 @@ public class UIMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
         opcoesMed.show(cardOpcoesMedico, "removerProntuario");
         limparCampos(getContentPane());
-        atualizarListaRemoverDados();
+        atualizarListaRemoverPront();
     }//GEN-LAST:event_botaoRemoverProntuarioActionPerformed
 
     private void botaoAtualizarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarProntuarioActionPerformed
@@ -1926,20 +1919,27 @@ public class UIMedico extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botaoAtualizarDadosActionPerformed
 
-    private void botaoRemoverPacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverPacActionPerformed
-//        // TODO add your handling code here:
-//
-//        //int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", JOptionPane.WARNING_MESSAGE);
-//        int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover esse paciente?", "Remoção", 1);
-//        if(resposta == 0){
-//            sec.removerPaciente(pacientes.get(listaPacientes.getSelectedIndex()));
-//            JOptionPane.showMessageDialog(null, "Paciente removido");
-//            atualizarListaRemover();
-//        }else if (resposta == 1){
-//            JOptionPane.showMessageDialog(null, "Paciente mantido");
-//        }
+    private void botaoRemoverDadosAdcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverDadosAdcActionPerformed
+        // TODO add your handling code here:
+        dadosAdicionais = med.consultarDadosAdicionais();
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover estes dados?", "Remoção", 1);
+        if(resposta == 0){
+            //int indexDados = dadosAdicionais.get(listaDados.getSelectedIndex()).getIdDadosAdicionais();
+            //DadosAdicionais dados = med.consultarUmDado(indexDados);
+            DadosAdicionais dados = dadosAdicionais.get(listaDados.getSelectedIndex());
+            dadosAdicionais.get(listaDados.getSelectedIndex()).getPaciente().setDadosAdicionaisCadastrado(false);
+            dadosAdicionais.get(listaDados.getSelectedIndex()).getPaciente().setDadosAdicionais(null);
+            med.atualizarPaciente(dadosAdicionais.get(listaDados.getSelectedIndex()).getPaciente());
+            
+            med.removerDadosPaciente(dados);
+            
+            JOptionPane.showMessageDialog(null, "Dado removido");
+            atualizarListaRemoverDados();
+        }else if (resposta == 1){
+            JOptionPane.showMessageDialog(null, "Dado mantida");
+        }
 
-    }//GEN-LAST:event_botaoRemoverPacActionPerformed
+    }//GEN-LAST:event_botaoRemoverDadosAdcActionPerformed
 
     private void pacientesBoxProntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesBoxProntActionPerformed
         // TODO add your handling code here:
@@ -1978,6 +1978,23 @@ public class UIMedico extends javax.swing.JFrame {
 
     private void botaoRemoverProntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverProntActionPerformed
         // TODO add your handling code here:
+                // TODO add your handling code here:
+        prontuarios = med.consultarProntuarios();
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo remover estes dados?", "Remoção", 1);
+        if(resposta == 0){
+            int indexDados = prontuarios.get(listaPront.getSelectedIndex()).getIdProntuario();
+            Prontuario pront = med.consultarUmProntuario(indexDados);
+            prontuarios.get(listaPront.getSelectedIndex()).getPaciente().setProntuarioCadastrado(false);
+            prontuarios.get(listaPront.getSelectedIndex()).getPaciente().setProntuario(null);
+            med.atualizarPaciente(prontuarios.get(listaPront.getSelectedIndex()).getPaciente());
+            
+            med.removerProntuario(pront);
+            
+            JOptionPane.showMessageDialog(null, "Prontuario removido");
+            atualizarListaRemoverPront();
+        }else if (resposta == 1){
+            JOptionPane.showMessageDialog(null, "Prontuario mantido");
+        }
     }//GEN-LAST:event_botaoRemoverProntActionPerformed
 
     private void botaoVoltarRelatoriosvoltarMenuPrincipal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarRelatoriosvoltarMenuPrincipal
@@ -2151,7 +2168,7 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JButton botaoReceita;
     private javax.swing.JButton botaoRelatorio;
     private javax.swing.JButton botaoRemoverDados;
-    private javax.swing.JButton botaoRemoverPac;
+    private javax.swing.JButton botaoRemoverDadosAdc;
     private javax.swing.JButton botaoRemoverPront;
     private javax.swing.JButton botaoRemoverProntuario;
     private javax.swing.JButton botaoSalvarProntuario;
@@ -2180,8 +2197,8 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
-    private javax.swing.JList<String> listaPacientes;
-    private javax.swing.JList<String> listaPacientes1;
+    private javax.swing.JList<String> listaDados;
+    private javax.swing.JList<String> listaPront;
     private javax.swing.JPanel menuGerenciarDadosPaciente;
     private javax.swing.JPanel menuGerenciarProntuario;
     private javax.swing.JPanel menuGerenciarRelatorios;
@@ -2267,7 +2284,33 @@ public class UIMedico extends javax.swing.JFrame {
     }
 
     private void atualizarListaRemoverDados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dadosAdicionais = med.consultarDadosAdicionais();
+        if (dadosAdicionais.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhuma dado cadastrado", "Remover Dados", JOptionPane.WARNING_MESSAGE);
+        }else{
+             DefaultListModel itensDados = new DefaultListModel();
+             dadosAdicionais.forEach(itens -> {
+                 itensDados.addElement(itens.getPaciente().getNome());
+            });
+            
+             listaDados.setModel(itensDados);
+        }
+    }
+    
+        private void atualizarListaRemoverPront(){
+        prontuarios = med.consultarProntuarios();
+        if (prontuarios.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhuma dado cadastrado", "Remover Dados", JOptionPane.WARNING_MESSAGE);
+        }else{
+             DefaultListModel itensDados = new DefaultListModel();
+             prontuarios.forEach(itens -> {
+                 itensDados.addElement(itens.getPaciente().getNome());
+            });
+            
+             listaPront.setModel(itensDados);
+        }
     }
 
     private void atualizarComboBoxPacDados() {
