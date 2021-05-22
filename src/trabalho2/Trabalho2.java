@@ -13,7 +13,6 @@ import POJO.Prontuario;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.ArrayList;
-import java.util.Arrays;
 import sistema.GerenciadorMsg;
 import sistema.Medico;
 import sistema.Secretaria;

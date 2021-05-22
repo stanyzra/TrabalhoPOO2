@@ -12,10 +12,6 @@ public class Usuario {
     public Usuario() {
         
     }
-    
-    public void menu() {
-        
-    }
 
     public void cadastrarPaciente(Paciente pac){
         
@@ -134,6 +130,10 @@ public class Usuario {
     }
     
     public void enviarMensagem(int horario, int telefone, String email){
+        
+    }
+    
+    public void enviarMensagemTodos(List<Consulta> consultas){
         
     }
 }

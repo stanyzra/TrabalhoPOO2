@@ -9,7 +9,6 @@ import POJO.DadosAdicionais;
 import POJO.Paciente;
 import POJO.Prontuario;
 import java.awt.CardLayout;
-import java.awt.CheckboxGroup;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.time.LocalDate;
@@ -2084,24 +2083,7 @@ public class UIMedico extends javax.swing.JFrame {
     private void botaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatorioActionPerformed
         menu.show(cardMenu, "menuGerenciarRelatorios");
     }//GEN-LAST:event_botaoRelatorioActionPerformed
-
-
-    public void atualizarComboBoxPacientes(JComboBox comboBox, String tela){
-//        limparCampos(getContentPane());
-//        prontuarios = med.consultarProntuarios();
-//        if (pacientes.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Nenhum prontuario cadastrado", "Atualizar Prontuario", JOptionPane.WARNING_MESSAGE);
-//        }else{
-//            comboBox.removeAllItems();
-//            opcoesMed.show(cardOpcoesMedico, tela);
-//            
-//            pacientes.forEach(itens -> {
-//                comboBox.addItem(itens.getNome());
-//            });     
-//            atualizarCamposAlteracaoProntuario();
-//        }
-    }
-    
+   
     private void botaoDadosPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDadosPacienteActionPerformed
         // TODO add your handling code here:
         menu.show(cardMenu, "menuGerenciarDadosPaciente");
@@ -2365,10 +2347,6 @@ public class UIMedico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado ou atendido no mês", "Clientes Atendidos", JOptionPane.WARNING_MESSAGE);
         }else{
             DefaultListModel itensPac = new DefaultListModel();
-//            if (listaClientesAtendidos.getModel().getSize() == 0) {
-//                itensPac.addElement("nada");
-//                listaClientesAtendidos.setModel(itensPac);
-//            }
              pacientes.forEach(itens -> {
                  itensPac.addElement(itens.getNome());
             });

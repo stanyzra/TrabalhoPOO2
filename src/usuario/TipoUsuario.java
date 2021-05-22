@@ -21,10 +21,6 @@ public class TipoUsuario {
 
     }
 
-    public void menu() {
-        this.usuario.menu();
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }

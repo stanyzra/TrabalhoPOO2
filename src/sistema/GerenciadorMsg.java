@@ -5,8 +5,11 @@
  */
 package sistema;
 
+import POJO.Consulta;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,4 +43,19 @@ public class GerenciadorMsg extends usuario.Usuario {
         }
     }
     
+    public void enviarMensagemTodos(List<Consulta> consultas){
+        String nomesNaoEnviados = "";
+        for (Consulta cons : consultas) {
+            if (cons.getPaciente().getEmail().equals("") && cons.getPaciente().getTelefone() == 0){
+                nomesNaoEnviados += cons.getPaciente().getNome() + "\n";
+            }
+        }
+        if (nomesNaoEnviados.equals("")) {
+                JOptionPane.showMessageDialog(null, "Todos os pacientes da lista receberam uma mensagem lembrando-as da sua consulta amanhã.",
+                "Enviar Mensagens para Todos os Pacientes", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível enviar as mensagens para os seguintes pacientes por falta de email e celular: \n"+nomesNaoEnviados,
+            "Enviar Mensagens para Todos os Pacientes", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 }

@@ -47,9 +47,4 @@ public class Secretaria extends usuario.Usuario {
         dao.excluir(cons.getIdConsulta(), cons.getClass());
     }
 
-//    public Paciente consultarUmPaciente(Paciente paciente){
-//        GenericDAO<Paciente> dao = new GenericDAO<>();
-//        paciente = dao.consultar(paciente.getId(), Paciente.class);
-//        return paciente;
-//    }
 }

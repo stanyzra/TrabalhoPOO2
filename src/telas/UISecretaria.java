@@ -5,46 +5,25 @@
  */
 package telas;
 
-import DAO.GenericDAO;
 import POJO.Consulta;
 import POJO.Paciente;
 import POJO.Prontuario;
 import POJO.DadosAdicionais;
-
-import com.toedter.calendar.JDateChooser;
 import java.awt.CardLayout;
-import java.awt.CheckboxGroup;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ResourceBundle.Control;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.PlainDocument;
 import sistema.Secretaria;
 /**
  *
@@ -60,7 +39,6 @@ public class UISecretaria extends javax.swing.JFrame {
     private ButtonGroup grupoAtualizarConvenio;
     private ButtonGroup grupoAtualizarTipoPlano;
     private ButtonGroup grupoTipoConsulta;
-    private ButtonModel modelAtualizarConvenio;
     Secretaria sec;
     /**
      * Creates new form secretaria
@@ -75,7 +53,6 @@ public class UISecretaria extends javax.swing.JFrame {
         this.grupoTipoConsulta = new javax.swing.ButtonGroup();
         this.grupoAtualizarTipoPlano = new javax.swing.ButtonGroup();
         //this.pacientes = new List<>();
-        this.modelAtualizarConvenio = grupoConvenio.getSelection();
         this.sec = new Secretaria();
         setSize(new Dimension(804, 600));
     }
@@ -91,7 +68,6 @@ public class UISecretaria extends javax.swing.JFrame {
         this.grupoTipoConsulta = new javax.swing.ButtonGroup();
         this.pacientes = pacientes;
         this.consultas = consultas;
-        this.modelAtualizarConvenio = grupoConvenio.getSelection();
         this.sec = new Secretaria();
         setSize(new Dimension(804, 600));
     }
@@ -2680,7 +2656,6 @@ public class UISecretaria extends javax.swing.JFrame {
             consultas.forEach(itens -> {
                 consBox.addItem(itens.getPaciente().getNome());
             });     
-            //atualizarCamposAlteracao();
         }
     }
     
@@ -2820,6 +2795,7 @@ public class UISecretaria extends javax.swing.JFrame {
             dadosAtualizados.setTelefone(0);
         else
             dadosAtualizados.setTelefone(Integer.parseInt(atualizaTelField.getText()));
+        
         dadosAtualizados.setBairro(atualizaBairroField.getText());
         dadosAtualizados.setCidade(atualizaCidadeField.getText());
         dadosAtualizados.setRua(atualizaRuaField.getText());
@@ -2913,19 +2889,19 @@ public class UISecretaria extends javax.swing.JFrame {
             (dataSelecionada.get(Calendar.MONTH)+1),
             dataSelecionada.get(Calendar.DAY_OF_MONTH)));
 
-    pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
-    novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
-    novaCons.getPaciente().setConsultaCadastrada(true);
+        pacientes.get(pacientesBoxCons.getSelectedIndex()).setConsulta(novaCons);
+        novaCons.setPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        novaCons.getPaciente().setConsultaCadastrada(true);
 
-    sec.cadastrarConsulta(novaCons);
-    sec.atualizarPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
-    JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso.");
+        sec.cadastrarConsulta(novaCons);
+        sec.atualizarPaciente(pacientes.get(pacientesBoxCons.getSelectedIndex()));
+        JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso.");
 
-    pacientes.remove(pacientesBoxCons.getSelectedIndex());
-    pacientesBoxCons.removeItemAt(pacientesBoxCons.getSelectedIndex());
+        pacientes.remove(pacientesBoxCons.getSelectedIndex());
+        pacientesBoxCons.removeItemAt(pacientesBoxCons.getSelectedIndex());
 
-    limparCampos(getContentPane());
-    atualizarComboBoxPacCons();
+        limparCampos(getContentPane());
+        atualizarComboBoxPacCons();
     }//GEN-LAST:event_botaoSalvarConsActionPerformed
 
     private void radioRetornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRetornoActionPerformed

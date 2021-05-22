@@ -6,9 +6,7 @@
 package telas;
 
 import POJO.Consulta;
-import POJO.DadosAdicionais;
 import POJO.Paciente;
-import POJO.Prontuario;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.time.LocalDate;
@@ -18,7 +16,6 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import sistema.GerenciadorMsg;
-import sistema.Medico;
 
 /**
  *
@@ -29,7 +26,6 @@ public class UIGerenciadorMsg extends javax.swing.JFrame {
     final CardLayout menu;
     final CardLayout opcoesGerenciadorMsg;
     final DateTimeFormatter toBarras;
-    private List<Paciente> pacientes;
     private List<Consulta> consultas;
 
     GerenciadorMsg ctrlMsg;
@@ -50,7 +46,6 @@ public class UIGerenciadorMsg extends javax.swing.JFrame {
         this.toBarras = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         opcoesGerenciadorMsg = (CardLayout) (cardOpcoesGerenciador.getLayout());
         opcoesGerenciadorMsg.show(cardOpcoesGerenciador, "telaDefault");
-        this.pacientes = pacientes;
         this.consultas = consultas;
         this.ctrlMsg = new GerenciadorMsg();
         setSize(new Dimension(804, 600));
@@ -362,6 +357,8 @@ public class UIGerenciadorMsg extends javax.swing.JFrame {
 
     private void botaoEnviarMsgTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarMsgTodosActionPerformed
         // TODO add your handling code here:
+        ctrlMsg.enviarMensagemTodos(consultas);
+        
     }//GEN-LAST:event_botaoEnviarMsgTodosActionPerformed
 
     private void consProximoDiaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consProximoDiaFieldActionPerformed
