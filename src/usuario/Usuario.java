@@ -5,6 +5,7 @@ import POJO.Consulta;
 import POJO.DadosAdicionais;
 import POJO.Paciente;
 import POJO.Prontuario;
+import java.util.List;
 
 public class Usuario {
 
@@ -74,7 +75,65 @@ public class Usuario {
         
     }
     
-    public void enviarMensagem(){
+    public List<DadosAdicionais> consultarDadosAdicionais(){
+        GenericDAO dao = new GenericDAO<>();
+        List<DadosAdicionais> dadosAdicionais;
+        dadosAdicionais = dao.consultar(DadosAdicionais.class);
+        return dadosAdicionais;
+    }
+    
+    public DadosAdicionais consultarUmDado(int id){
+        GenericDAO<DadosAdicionais> dao = new GenericDAO<>();
+        DadosAdicionais dados = dao.consultar(id, DadosAdicionais.class);
+        return dados;
+    }
+    
+    public List<Prontuario> consultarProntuarios(){
+        GenericDAO dao = new GenericDAO<>();
+        List<Prontuario> prontuario;
+        prontuario = dao.consultar(Prontuario.class);
+        return prontuario;
+    }
+    
+    public Prontuario consultarUmProntuario(int id){
+        GenericDAO<Prontuario> dao = new GenericDAO<>();
+        Prontuario pront = dao.consultar(id, Prontuario.class);
+        return pront;
+    }
+    
+    public List<Paciente> consultarPacientes(){
+        GenericDAO dao = new GenericDAO<>();
+        List<Paciente> paciente;
+        paciente = dao.consultar(Paciente.class);
+        return paciente;
+    }
+        
+    public Paciente consultarUmPaciente(int id){
+        GenericDAO<Paciente> dao = new GenericDAO<>();
+        Paciente pac = dao.consultar(id, Paciente.class);
+        return pac;
+    }
+    
+    public List<Paciente> consultarPacienteNome(String nome){
+        GenericDAO dao = new GenericDAO<>();
+        List<Paciente> paciente;
+        paciente = dao.consultar(Paciente.class, nome);
+        return paciente;
+    }
+        
+    public List<Consulta> consultarConsultas(){
+        GenericDAO dao = new GenericDAO<>();
+        List<Consulta> consulta;
+        consulta = dao.consultar(Consulta.class);
+        return consulta;
+    }
+    public Consulta consultarUmaConsulta(int id){
+        GenericDAO<Consulta> dao = new GenericDAO<>();
+        Consulta cons = dao.consultar(id, Consulta.class);
+        return cons;
+    }
+    
+    public void enviarMensagem(int horario, int telefone, String email){
         
     }
 }

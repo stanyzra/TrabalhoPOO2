@@ -5,49 +5,28 @@
  */
 package telas;
 
-
-import DAO.GenericDAO;
-import POJO.Consulta;
 import POJO.DadosAdicionais;
 import POJO.Paciente;
 import POJO.Prontuario;
-import com.toedter.calendar.JDateChooser;
 import java.awt.CardLayout;
 import java.awt.CheckboxGroup;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.ResourceBundle.Control;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.PlainDocument;
+import javax.swing.JViewport;
 import sistema.Medico;
-import sistema.Secretaria;
 
 /**
  *
@@ -57,15 +36,11 @@ public class UIMedico extends javax.swing.JFrame {
     final CardLayout menu;
     final CardLayout opcoesMed;
     final DateTimeFormatter toBarras;
-    
     private List<Paciente> pacientes;
     private List<Prontuario> prontuarios;
     private List<DadosAdicionais> dadosAdicionais;
-    private CheckboxGroup checkGroupDados;
     Medico med;
-    /**
-     * Creates new form medico
-     */
+    
     public UIMedico() {
         initComponents();
         menu = (CardLayout) (cardMenu.getLayout());
@@ -74,7 +49,6 @@ public class UIMedico extends javax.swing.JFrame {
         this.toBarras = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.prontuarios = new ArrayList<>();
         this.med = new Medico();
-        this.checkGroupDados = new CheckboxGroup();
         this.dadosAdicionais = new ArrayList<>();
         setSize(new Dimension(804, 600));
     }
@@ -88,7 +62,6 @@ public class UIMedico extends javax.swing.JFrame {
         this.pacientes = pacientes;
         this.prontuarios = prontuarios;
         this.med = new Medico();
-        this.checkGroupDados = new CheckboxGroup();
         this.dadosAdicionais = dadosAdicionais;
         setSize(new Dimension(804, 600));
     }
@@ -123,12 +96,12 @@ public class UIMedico extends javax.swing.JFrame {
         voltarProntuarioLable = new javax.swing.JLabel();
         botaoVoltarProntuario = new javax.swing.JButton();
         menuGerenciarRelatorios = new javax.swing.JPanel();
-        botaoReceita = new javax.swing.JButton();
-        botaoAtestado = new javax.swing.JButton();
-        botaoAcompanhamento = new javax.swing.JButton();
-        botaoClientesMes = new javax.swing.JButton();
+        botaoMenuReceita = new javax.swing.JButton();
+        botaoMenuAtestado = new javax.swing.JButton();
+        botaoMenuAcompanhamento = new javax.swing.JButton();
+        botaoMenuClientesMes = new javax.swing.JButton();
         voltarRelatoriosLable = new javax.swing.JLabel();
-        botaoVoltarRelatorios = new javax.swing.JButton();
+        botaoMenuVoltarRelatorios = new javax.swing.JButton();
         cardOpcoesMedico = new javax.swing.JPanel();
         telaDefault = new javax.swing.JPanel();
         cadastrarDadosPaciente = new javax.swing.JPanel();
@@ -211,8 +184,36 @@ public class UIMedico extends javax.swing.JFrame {
         listaPront = new javax.swing.JList<>();
         painelRemoverProntuario = new javax.swing.JPanel();
         botaoRemoverPront = new javax.swing.JButton();
+        gerarReceitaMed = new javax.swing.JPanel();
+        gerarReceitaLabel = new javax.swing.JLabel();
+        painelReceitaMedArea = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        receitaMedArea = new javax.swing.JTextArea();
+        painelBotaoGerarReceita = new javax.swing.JPanel();
+        botaoGerarReceita = new javax.swing.JButton();
+        gerarAtestadoMed = new javax.swing.JPanel();
+        gerarAtestadoLabel = new javax.swing.JLabel();
+        painelAtestadoMedArea = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        atestadoMedArea = new javax.swing.JTextArea();
+        painelBotaoGerarAtestado = new javax.swing.JPanel();
+        botaoGerarAtestado = new javax.swing.JButton();
+        gerarDeclaracaoAcomp = new javax.swing.JPanel();
+        gerarDeclaracaoLabel = new javax.swing.JLabel();
+        painelDeclaracaoMedArea = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        declaracaoMedArea = new javax.swing.JTextArea();
+        painelBotaoGerarDeclaracao = new javax.swing.JPanel();
+        botaoGerarDeclaracao = new javax.swing.JButton();
+        gerarRelClientesMes = new javax.swing.JPanel();
+        painelListaClientesAtendidos = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        listaClientesAtendidos = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        mesField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         cardMenu.setPreferredSize(new java.awt.Dimension(226, 536));
         cardMenu.setLayout(new java.awt.CardLayout());
@@ -292,29 +293,29 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(menuMedicoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botaoDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botaoProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(menuMedicoLayout.createSequentialGroup()
                         .addComponent(voltarMainLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoVoltarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(botaoDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(botaoVoltarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 180, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         menuMedicoLayout.setVerticalGroup(
             menuMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuMedicoLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
-                .addGap(189, 189, 189)
+                .addComponent(botaoDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+                .addGap(184, 184, 184)
                 .addGroup(menuMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(voltarMainLable))
-                .addGap(25, 25, 25))
+                .addGap(16, 16, 16))
         );
 
         cardMenu.add(menuMedico, "menuMedico");
@@ -394,29 +395,29 @@ public class UIMedico extends javax.swing.JFrame {
             .addGroup(menuGerenciarDadosPacienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuGerenciarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(botaoCadastrarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botaoAtualizarDadosPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(menuGerenciarDadosPacienteLayout.createSequentialGroup()
                         .addComponent(voltarDadosLable)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoVoltarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botaoRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoCadastrarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoAtualizarDadosPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoVoltarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         menuGerenciarDadosPacienteLayout.setVerticalGroup(
             menuGerenciarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarDadosPacienteLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoCadastrarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(57, 57, 57)
-                .addComponent(botaoAtualizarDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                .addGap(189, 189, 189)
+                .addComponent(botaoCadastrarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoAtualizarDadosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRemoverDados, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addGap(184, 184, 184)
                 .addGroup(menuGerenciarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(voltarDadosLable))
-                .addGap(25, 25, 25))
+                .addGap(16, 16, 16))
         );
 
         cardMenu.add(menuGerenciarDadosPaciente, "menuGerenciarDadosPaciente");
@@ -498,9 +499,9 @@ public class UIMedico extends javax.swing.JFrame {
                 .addGroup(menuGerenciarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuGerenciarProntuarioLayout.createSequentialGroup()
                         .addComponent(voltarProntuarioLable)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoVoltarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botaoRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoVoltarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(botaoRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(botaoCadastrarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(botaoAtualizarProntuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -509,101 +510,101 @@ public class UIMedico extends javax.swing.JFrame {
             menuGerenciarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarProntuarioLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoCadastrarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                .addGap(189, 189, 189)
+                .addComponent(botaoCadastrarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoAtualizarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addGap(184, 184, 184)
                 .addGroup(menuGerenciarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(voltarProntuarioLable))
-                .addGap(25, 25, 25))
+                .addGap(16, 16, 16))
         );
 
         cardMenu.add(menuGerenciarProntuario, "menuGerenciarProntuario");
 
         menuGerenciarRelatorios.setBackground(new java.awt.Color(204, 204, 204));
 
-        botaoReceita.setBackground(new java.awt.Color(204, 204, 204));
-        botaoReceita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoReceita.setForeground(new java.awt.Color(51, 51, 51));
-        botaoReceita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoReceita.setText("Gerar Receita Médica");
-        botaoReceita.setBorder(null);
-        botaoReceita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoReceita.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoReceita.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoReceita.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoReceita.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenuReceita.setBackground(new java.awt.Color(204, 204, 204));
+        botaoMenuReceita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoMenuReceita.setForeground(new java.awt.Color(51, 51, 51));
+        botaoMenuReceita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoMenuReceita.setText("Gerar Receita Médica");
+        botaoMenuReceita.setBorder(null);
+        botaoMenuReceita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoMenuReceita.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoMenuReceita.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoMenuReceita.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoMenuReceita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoReceitaActionPerformed(evt);
+                botaoMenuReceitaActionPerformed(evt);
             }
         });
 
-        botaoAtestado.setBackground(new java.awt.Color(204, 204, 204));
-        botaoAtestado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoAtestado.setForeground(new java.awt.Color(51, 51, 51));
-        botaoAtestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoAtestado.setText("Gerar Atestado Médico");
-        botaoAtestado.setBorder(null);
-        botaoAtestado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoAtestado.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoAtestado.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoAtestado.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoAtestado.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenuAtestado.setBackground(new java.awt.Color(204, 204, 204));
+        botaoMenuAtestado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoMenuAtestado.setForeground(new java.awt.Color(51, 51, 51));
+        botaoMenuAtestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoMenuAtestado.setText("Gerar Atestado Médico");
+        botaoMenuAtestado.setBorder(null);
+        botaoMenuAtestado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoMenuAtestado.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoMenuAtestado.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoMenuAtestado.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoMenuAtestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAtestadoActionPerformed(evt);
+                botaoMenuAtestadoActionPerformed(evt);
             }
         });
 
-        botaoAcompanhamento.setBackground(new java.awt.Color(204, 204, 204));
-        botaoAcompanhamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoAcompanhamento.setForeground(new java.awt.Color(51, 51, 51));
-        botaoAcompanhamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoAcompanhamento.setText("Gerar Declaração de Acompanhamento");
-        botaoAcompanhamento.setBorder(null);
-        botaoAcompanhamento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoAcompanhamento.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoAcompanhamento.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoAcompanhamento.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoAcompanhamento.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenuAcompanhamento.setBackground(new java.awt.Color(204, 204, 204));
+        botaoMenuAcompanhamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoMenuAcompanhamento.setForeground(new java.awt.Color(51, 51, 51));
+        botaoMenuAcompanhamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoMenuAcompanhamento.setText("Gerar Declaração de Acompanhamento");
+        botaoMenuAcompanhamento.setBorder(null);
+        botaoMenuAcompanhamento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoMenuAcompanhamento.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoMenuAcompanhamento.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoMenuAcompanhamento.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoMenuAcompanhamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAcompanhamentoActionPerformed(evt);
+                botaoMenuAcompanhamentoActionPerformed(evt);
             }
         });
 
-        botaoClientesMes.setBackground(new java.awt.Color(204, 204, 204));
-        botaoClientesMes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoClientesMes.setForeground(new java.awt.Color(51, 51, 51));
-        botaoClientesMes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoClientesMes.setText("Gerar Relatório de Clientes do Mês");
-        botaoClientesMes.setBorder(null);
-        botaoClientesMes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoClientesMes.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoClientesMes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoClientesMes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoClientesMes.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenuClientesMes.setBackground(new java.awt.Color(204, 204, 204));
+        botaoMenuClientesMes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoMenuClientesMes.setForeground(new java.awt.Color(51, 51, 51));
+        botaoMenuClientesMes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoMenuClientesMes.setText("Gerar Relatório de Clientes do Mês");
+        botaoMenuClientesMes.setBorder(null);
+        botaoMenuClientesMes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoMenuClientesMes.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoMenuClientesMes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoMenuClientesMes.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoMenuClientesMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoClientesMesActionPerformed(evt);
+                botaoMenuClientesMesActionPerformed(evt);
             }
         });
 
         voltarRelatoriosLable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icones/back.png"))); // NOI18N
 
-        botaoVoltarRelatorios.setBackground(new java.awt.Color(204, 204, 204));
-        botaoVoltarRelatorios.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botaoVoltarRelatorios.setForeground(new java.awt.Color(51, 51, 51));
-        botaoVoltarRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
-        botaoVoltarRelatorios.setText("Voltar");
-        botaoVoltarRelatorios.setBorder(null);
-        botaoVoltarRelatorios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botaoVoltarRelatorios.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
-        botaoVoltarRelatorios.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
-        botaoVoltarRelatorios.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
-        botaoVoltarRelatorios.addActionListener(new java.awt.event.ActionListener() {
+        botaoMenuVoltarRelatorios.setBackground(new java.awt.Color(204, 204, 204));
+        botaoMenuVoltarRelatorios.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoMenuVoltarRelatorios.setForeground(new java.awt.Color(51, 51, 51));
+        botaoMenuVoltarRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoMenuVoltarRelatorios.setText("Voltar");
+        botaoMenuVoltarRelatorios.setBorder(null);
+        botaoMenuVoltarRelatorios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoMenuVoltarRelatorios.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoMenuVoltarRelatorios.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoMenuVoltarRelatorios.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoMenuVoltarRelatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoVoltarRelatoriosvoltarMenuPrincipal(evt);
+                botaoMenuVoltarRelatoriosvoltarMenuPrincipal(evt);
             }
         });
 
@@ -617,30 +618,29 @@ public class UIMedico extends javax.swing.JFrame {
                     .addGroup(menuGerenciarRelatoriosLayout.createSequentialGroup()
                         .addComponent(voltarRelatoriosLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoVoltarRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(botaoAcompanhamento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoAtestado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(botaoClientesMes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(botaoMenuVoltarRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(botaoMenuAcompanhamento, javax.swing.GroupLayout.PREFERRED_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(botaoMenuReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botaoMenuAtestado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botaoMenuClientesMes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuGerenciarRelatoriosLayout.setVerticalGroup(
             menuGerenciarRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarRelatoriosLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoAcompanhamento, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoClientesMes, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                .addGap(88, 88, 88)
+                .addComponent(botaoMenuReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoMenuAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoMenuAcompanhamento, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoMenuClientesMes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addGap(82, 82, 82)
                 .addGroup(menuGerenciarRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botaoVoltarRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoMenuVoltarRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(voltarRelatoriosLable))
-                .addGap(31, 31, 31))
+                .addGap(16, 16, 16))
         );
 
         cardMenu.add(menuGerenciarRelatorios, "menuGerenciarRelatorios");
@@ -655,7 +655,7 @@ public class UIMedico extends javax.swing.JFrame {
         telaDefault.setLayout(telaDefaultLayout);
         telaDefaultLayout.setHorizontalGroup(
             telaDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1114, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
         telaDefaultLayout.setVerticalGroup(
             telaDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -865,9 +865,9 @@ public class UIMedico extends javax.swing.JFrame {
                         .addComponent(painelCadastraAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrarDadosPacienteLayout.createSequentialGroup()
-                .addContainerGap(636, Short.MAX_VALUE)
+                .addContainerGap(391, Short.MAX_VALUE)
                 .addComponent(painelCadastraDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         cadastrarDadosPacienteLayout.setVerticalGroup(
             cadastrarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1096,7 +1096,7 @@ public class UIMedico extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(painelAtualizaAlergias, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(painelAtualizaDadosCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(568, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         atualizarDadosPacienteLayout.setVerticalGroup(
             atualizarDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1172,7 +1172,7 @@ public class UIMedico extends javax.swing.JFrame {
                     .addGroup(painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(excluirDadosLable)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 564, Short.MAX_VALUE))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
         painelExcluirDadosPacienteLayout.setVerticalGroup(
             painelExcluirDadosPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1396,7 +1396,7 @@ public class UIMedico extends javax.swing.JFrame {
                             .addComponent(painelPacientesProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(paineSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 568, Short.MAX_VALUE))
+                .addGap(0, 79, Short.MAX_VALUE))
         );
         cadastrarProntuarioLayout.setVerticalGroup(
             cadastrarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1607,7 +1607,7 @@ public class UIMedico extends javax.swing.JFrame {
                         .addGroup(atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(painelAtualizaSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(painelAtualizaPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(568, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         atualizarProntuarioLayout.setVerticalGroup(
             atualizarProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1680,12 +1680,13 @@ public class UIMedico extends javax.swing.JFrame {
             painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelExcluirProntuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(painelRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(excluirProntuarioLable))
-                .addGap(0, 564, Short.MAX_VALUE))
+                .addGroup(painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(painelExcluirProntuarioLayout.createSequentialGroup()
+                        .addGap(402, 402, 402)
+                        .addComponent(painelRemoverProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(excluirProntuarioLable)
+                    .addComponent(jScrollPane2))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
         painelExcluirProntuarioLayout.setVerticalGroup(
             painelExcluirProntuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1717,22 +1718,361 @@ public class UIMedico extends javax.swing.JFrame {
 
         cardOpcoesMedico.add(removerProntuario, "removerProntuario");
 
+        gerarReceitaMed.setBackground(new java.awt.Color(51, 51, 51));
+
+        gerarReceitaLabel.setBackground(new java.awt.Color(204, 204, 204));
+        gerarReceitaLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gerarReceitaLabel.setForeground(new java.awt.Color(204, 204, 204));
+        gerarReceitaLabel.setText("Escreva a receita médica no campo abaixo");
+
+        painelReceitaMedArea.setBackground(new java.awt.Color(51, 51, 51));
+
+        receitaMedArea.setColumns(20);
+        receitaMedArea.setRows(5);
+        jScrollPane3.setViewportView(receitaMedArea);
+
+        javax.swing.GroupLayout painelReceitaMedAreaLayout = new javax.swing.GroupLayout(painelReceitaMedArea);
+        painelReceitaMedArea.setLayout(painelReceitaMedAreaLayout);
+        painelReceitaMedAreaLayout.setHorizontalGroup(
+            painelReceitaMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelReceitaMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelReceitaMedAreaLayout.setVerticalGroup(
+            painelReceitaMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelReceitaMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        painelBotaoGerarReceita.setBackground(new java.awt.Color(51, 51, 51));
+
+        botaoGerarReceita.setBackground(new java.awt.Color(204, 204, 204));
+        botaoGerarReceita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoGerarReceita.setForeground(new java.awt.Color(51, 51, 51));
+        botaoGerarReceita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoGerarReceita.setText("Gerar Receita");
+        botaoGerarReceita.setBorder(null);
+        botaoGerarReceita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoGerarReceita.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoGerarReceita.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoGerarReceita.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoGerarReceita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGerarReceitaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelBotaoGerarReceitaLayout = new javax.swing.GroupLayout(painelBotaoGerarReceita);
+        painelBotaoGerarReceita.setLayout(painelBotaoGerarReceitaLayout);
+        painelBotaoGerarReceitaLayout.setHorizontalGroup(
+            painelBotaoGerarReceitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarReceitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botaoGerarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        painelBotaoGerarReceitaLayout.setVerticalGroup(
+            painelBotaoGerarReceitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarReceitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoGerarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout gerarReceitaMedLayout = new javax.swing.GroupLayout(gerarReceitaMed);
+        gerarReceitaMed.setLayout(gerarReceitaMedLayout);
+        gerarReceitaMedLayout.setHorizontalGroup(
+            gerarReceitaMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarReceitaMedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerarReceitaMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelBotaoGerarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(gerarReceitaMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painelReceitaMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gerarReceitaLabel)))
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        gerarReceitaMedLayout.setVerticalGroup(
+            gerarReceitaMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarReceitaMedLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(gerarReceitaLabel)
+                .addGap(18, 18, 18)
+                .addComponent(painelReceitaMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(painelBotaoGerarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        cardOpcoesMedico.add(gerarReceitaMed, "gerarReceitaMed");
+
+        gerarAtestadoMed.setBackground(new java.awt.Color(51, 51, 51));
+
+        gerarAtestadoLabel.setBackground(new java.awt.Color(204, 204, 204));
+        gerarAtestadoLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gerarAtestadoLabel.setForeground(new java.awt.Color(204, 204, 204));
+        gerarAtestadoLabel.setText("Escreva o atestado médico no campo abaixo");
+
+        painelAtestadoMedArea.setBackground(new java.awt.Color(51, 51, 51));
+
+        atestadoMedArea.setColumns(20);
+        atestadoMedArea.setRows(5);
+        jScrollPane4.setViewportView(atestadoMedArea);
+
+        javax.swing.GroupLayout painelAtestadoMedAreaLayout = new javax.swing.GroupLayout(painelAtestadoMedArea);
+        painelAtestadoMedArea.setLayout(painelAtestadoMedAreaLayout);
+        painelAtestadoMedAreaLayout.setHorizontalGroup(
+            painelAtestadoMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtestadoMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelAtestadoMedAreaLayout.setVerticalGroup(
+            painelAtestadoMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtestadoMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        painelBotaoGerarAtestado.setBackground(new java.awt.Color(51, 51, 51));
+
+        botaoGerarAtestado.setBackground(new java.awt.Color(204, 204, 204));
+        botaoGerarAtestado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoGerarAtestado.setForeground(new java.awt.Color(51, 51, 51));
+        botaoGerarAtestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoGerarAtestado.setText("Gerar Atestado");
+        botaoGerarAtestado.setBorder(null);
+        botaoGerarAtestado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoGerarAtestado.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoGerarAtestado.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoGerarAtestado.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoGerarAtestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGerarAtestadoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelBotaoGerarAtestadoLayout = new javax.swing.GroupLayout(painelBotaoGerarAtestado);
+        painelBotaoGerarAtestado.setLayout(painelBotaoGerarAtestadoLayout);
+        painelBotaoGerarAtestadoLayout.setHorizontalGroup(
+            painelBotaoGerarAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarAtestadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botaoGerarAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        painelBotaoGerarAtestadoLayout.setVerticalGroup(
+            painelBotaoGerarAtestadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarAtestadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoGerarAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout gerarAtestadoMedLayout = new javax.swing.GroupLayout(gerarAtestadoMed);
+        gerarAtestadoMed.setLayout(gerarAtestadoMedLayout);
+        gerarAtestadoMedLayout.setHorizontalGroup(
+            gerarAtestadoMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarAtestadoMedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerarAtestadoMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelBotaoGerarAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(gerarAtestadoMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painelAtestadoMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gerarAtestadoLabel)))
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        gerarAtestadoMedLayout.setVerticalGroup(
+            gerarAtestadoMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarAtestadoMedLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(gerarAtestadoLabel)
+                .addGap(18, 18, 18)
+                .addComponent(painelAtestadoMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(painelBotaoGerarAtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        cardOpcoesMedico.add(gerarAtestadoMed, "gerarAtestadoMed");
+
+        gerarDeclaracaoAcomp.setBackground(new java.awt.Color(51, 51, 51));
+
+        gerarDeclaracaoLabel.setBackground(new java.awt.Color(204, 204, 204));
+        gerarDeclaracaoLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gerarDeclaracaoLabel.setForeground(new java.awt.Color(204, 204, 204));
+        gerarDeclaracaoLabel.setText("Escreva a declaração de acompanhamento no campo abaixo");
+
+        painelDeclaracaoMedArea.setBackground(new java.awt.Color(51, 51, 51));
+
+        declaracaoMedArea.setColumns(20);
+        declaracaoMedArea.setRows(5);
+        jScrollPane5.setViewportView(declaracaoMedArea);
+
+        javax.swing.GroupLayout painelDeclaracaoMedAreaLayout = new javax.swing.GroupLayout(painelDeclaracaoMedArea);
+        painelDeclaracaoMedArea.setLayout(painelDeclaracaoMedAreaLayout);
+        painelDeclaracaoMedAreaLayout.setHorizontalGroup(
+            painelDeclaracaoMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDeclaracaoMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelDeclaracaoMedAreaLayout.setVerticalGroup(
+            painelDeclaracaoMedAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDeclaracaoMedAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        painelBotaoGerarDeclaracao.setBackground(new java.awt.Color(51, 51, 51));
+
+        botaoGerarDeclaracao.setBackground(new java.awt.Color(204, 204, 204));
+        botaoGerarDeclaracao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botaoGerarDeclaracao.setForeground(new java.awt.Color(51, 51, 51));
+        botaoGerarDeclaracao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/default.png"))); // NOI18N
+        botaoGerarDeclaracao.setText("Gerar Declaração");
+        botaoGerarDeclaracao.setBorder(null);
+        botaoGerarDeclaracao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoGerarDeclaracao.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
+        botaoGerarDeclaracao.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
+        botaoGerarDeclaracao.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        botaoGerarDeclaracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGerarDeclaracaoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelBotaoGerarDeclaracaoLayout = new javax.swing.GroupLayout(painelBotaoGerarDeclaracao);
+        painelBotaoGerarDeclaracao.setLayout(painelBotaoGerarDeclaracaoLayout);
+        painelBotaoGerarDeclaracaoLayout.setHorizontalGroup(
+            painelBotaoGerarDeclaracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarDeclaracaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botaoGerarDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        painelBotaoGerarDeclaracaoLayout.setVerticalGroup(
+            painelBotaoGerarDeclaracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoGerarDeclaracaoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoGerarDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout gerarDeclaracaoAcompLayout = new javax.swing.GroupLayout(gerarDeclaracaoAcomp);
+        gerarDeclaracaoAcomp.setLayout(gerarDeclaracaoAcompLayout);
+        gerarDeclaracaoAcompLayout.setHorizontalGroup(
+            gerarDeclaracaoAcompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarDeclaracaoAcompLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerarDeclaracaoAcompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelBotaoGerarDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(gerarDeclaracaoAcompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painelDeclaracaoMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gerarDeclaracaoLabel)))
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        gerarDeclaracaoAcompLayout.setVerticalGroup(
+            gerarDeclaracaoAcompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarDeclaracaoAcompLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(gerarDeclaracaoLabel)
+                .addGap(18, 18, 18)
+                .addComponent(painelDeclaracaoMedArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(painelBotaoGerarDeclaracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        cardOpcoesMedico.add(gerarDeclaracaoAcomp, "gerarDeclaracaoAcomp");
+
+        gerarRelClientesMes.setBackground(new java.awt.Color(51, 51, 51));
+
+        painelListaClientesAtendidos.setBackground(new java.awt.Color(51, 51, 51));
+
+        jScrollPane6.setViewportView(listaClientesAtendidos);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Lista de pacientes atendidos no mês");
+
+        mesField.setEditable(false);
+        mesField.setBackground(new java.awt.Color(102, 102, 102));
+        mesField.setForeground(new java.awt.Color(204, 204, 255));
+        mesField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mesFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelListaClientesAtendidosLayout = new javax.swing.GroupLayout(painelListaClientesAtendidos);
+        painelListaClientesAtendidos.setLayout(painelListaClientesAtendidosLayout);
+        painelListaClientesAtendidosLayout.setHorizontalGroup(
+            painelListaClientesAtendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelListaClientesAtendidosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelListaClientesAtendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                    .addGroup(painelListaClientesAtendidosLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mesField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        painelListaClientesAtendidosLayout.setVerticalGroup(
+            painelListaClientesAtendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelListaClientesAtendidosLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(painelListaClientesAtendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(mesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout gerarRelClientesMesLayout = new javax.swing.GroupLayout(gerarRelClientesMes);
+        gerarRelClientesMes.setLayout(gerarRelClientesMesLayout);
+        gerarRelClientesMesLayout.setHorizontalGroup(
+            gerarRelClientesMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarRelClientesMesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelListaClientesAtendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
+        );
+        gerarRelClientesMesLayout.setVerticalGroup(
+            gerarRelClientesMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerarRelClientesMesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelListaClientesAtendidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        cardOpcoesMedico.add(gerarRelClientesMes, "gerarRelClientesMes");
+
         jSplitPane2.setRightComponent(cardOpcoesMedico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarMainvoltarMenuPrincipal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarMainvoltarMenuPrincipal
@@ -1742,7 +2082,7 @@ public class UIMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarMainvoltarMenuPrincipal
 
     private void botaoRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatorioActionPerformed
-
+        menu.show(cardMenu, "menuGerenciarRelatorios");
     }//GEN-LAST:event_botaoRelatorioActionPerformed
 
 
@@ -1798,7 +2138,6 @@ public class UIMedico extends javax.swing.JFrame {
             dadosAdicionais.forEach(itens -> {
                 atualizaDadosPacientesBox.addItem(itens.getPaciente().getNome());
             });     
-            atualizarCamposAlteracaoDados();
         }
     }
     
@@ -1813,7 +2152,6 @@ public class UIMedico extends javax.swing.JFrame {
             prontuarios.forEach(itens -> {
                 pacientesBoxAttProntuario.addItem(itens.getPaciente().getNome());
             });     
-            atualizarCamposAlteracaoDados();
         }
     }
     
@@ -1829,7 +2167,7 @@ public class UIMedico extends javax.swing.JFrame {
     private void botaoCadastrarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarDadosActionPerformed
         opcoesMed.show(cardOpcoesMedico, "cadastrarDadosPaciente");
         limparCampos(getContentPane());
-        pacientes = med.consultarPaciente();
+        pacientes = med.consultarPacientes();
 
         for (int i = 0; i < pacientes.size(); i++) {
             if (pacientes.get(i).isDadosAdicionaisCadastrado()) {
@@ -1867,7 +2205,7 @@ public class UIMedico extends javax.swing.JFrame {
         opcoesMed.show(cardOpcoesMedico, "cadastrarProntuario");
         
         limparCampos(getContentPane());
-        pacientes = med.consultarPaciente();
+        pacientes = med.consultarPacientes();
 
         for (int i = 0; i < pacientes.size(); i++) {
             if (pacientes.get(i).isProntuarioCadastrado()) {
@@ -1997,25 +2335,63 @@ public class UIMedico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoRemoverProntActionPerformed
 
-    private void botaoVoltarRelatoriosvoltarMenuPrincipal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarRelatoriosvoltarMenuPrincipal
+    private void botaoMenuVoltarRelatoriosvoltarMenuPrincipal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuVoltarRelatoriosvoltarMenuPrincipal
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoVoltarRelatoriosvoltarMenuPrincipal
+        limparCampos(getContentPane());
+        menu.show(cardMenu, "menuMedico");
+        opcoesMed.show(cardOpcoesMedico, "telaDefault");
+    }//GEN-LAST:event_botaoMenuVoltarRelatoriosvoltarMenuPrincipal
 
-    private void botaoAcompanhamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAcompanhamentoActionPerformed
+    private void botaoMenuAcompanhamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuAcompanhamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoAcompanhamentoActionPerformed
+        opcoesMed.show(cardOpcoesMedico, "gerarDeclaracaoAcomp");
 
-    private void botaoAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtestadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoAtestadoActionPerformed
+    }//GEN-LAST:event_botaoMenuAcompanhamentoActionPerformed
 
-    private void botaoReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReceitaActionPerformed
+    private void botaoMenuAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuAtestadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoReceitaActionPerformed
+        opcoesMed.show(cardOpcoesMedico, "gerarAtestadoMed");
 
-    private void botaoClientesMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoClientesMesActionPerformed
+    }//GEN-LAST:event_botaoMenuAtestadoActionPerformed
+
+    private void botaoMenuReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuReceitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoClientesMesActionPerformed
+        opcoesMed.show(cardOpcoesMedico, "gerarReceitaMed");
+
+    }//GEN-LAST:event_botaoMenuReceitaActionPerformed
+    public void atualizarListaClientesMes(){
+        if (pacientes.isEmpty()) {
+            opcoesMed.show(cardOpcoesMedico, "telaDefault");
+            JOptionPane.showMessageDialog(null, "Nenhum paciente cadastrado ou atendido no mês", "Clientes Atendidos", JOptionPane.WARNING_MESSAGE);
+        }else{
+            DefaultListModel itensPac = new DefaultListModel();
+//            if (listaClientesAtendidos.getModel().getSize() == 0) {
+//                itensPac.addElement("nada");
+//                listaClientesAtendidos.setModel(itensPac);
+//            }
+             pacientes.forEach(itens -> {
+                 itensPac.addElement(itens.getNome());
+            });
+            
+             listaClientesAtendidos.setModel(itensPac);
+        }
+    }
+    private void botaoMenuClientesMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuClientesMesActionPerformed
+        // TODO add your handling code here:
+        opcoesMed.show(cardOpcoesMedico, "gerarRelClientesMes");
+        mesField.setText(String.valueOf(LocalDate.now().getMonthValue()));
+        pacientes = med.consultarPacientes();
+        for (int i = 0; i < pacientes.size(); i++) {
+            if (pacientes.get(i).isConsultaCadastrada() && pacientes.get(i).getConsulta().getLocalDateCons().getMonthValue() != LocalDate.now().getMonthValue()){
+                pacientes.remove(i);
+                i--;
+            }else if (!pacientes.get(i).isProntuarioCadastrado() && !pacientes.get(i).isDadosAdicionaisCadastrado()){
+                pacientes.remove(i);
+                i--;
+            }
+        }
+        atualizarListaClientesMes();
+    }//GEN-LAST:event_botaoMenuClientesMesActionPerformed
 
     private void botaoCadastraDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraDadosActionPerformed
 
@@ -2098,6 +2474,37 @@ public class UIMedico extends javax.swing.JFrame {
         atualizarCamposProntAlteracao();
     }//GEN-LAST:event_pacientesBoxAttProntuarioActionPerformed
 
+    private void botaoGerarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarReceitaActionPerformed
+        // TODO add your handling code here:
+        if (!receitaMedArea.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Receita gerada e encaminhada para a impressão", "Gerar Receita", JOptionPane.INFORMATION_MESSAGE);
+            limparCampos(getContentPane());
+        }else
+            JOptionPane.showMessageDialog(null, "O campo deve ser preenchido para a receita ser gerada", "Gerar Receita", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_botaoGerarReceitaActionPerformed
+
+    private void botaoGerarAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarAtestadoActionPerformed
+        // TODO add your handling code here:
+        if (!atestadoMedArea.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Atestado gerada e encaminhada para a impressão", "Gerar Atestado", JOptionPane.INFORMATION_MESSAGE);
+            limparCampos(getContentPane());
+        }else
+            JOptionPane.showMessageDialog(null, "O campo deve ser preenchido para o atestado ser gerado", "Gerar Atestado", JOptionPane.ERROR_MESSAGE);
+        
+    }//GEN-LAST:event_botaoGerarAtestadoActionPerformed
+
+    private void botaoGerarDeclaracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarDeclaracaoActionPerformed
+        // TODO add your handling code here:
+        if (!declaracaoMedArea.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Declaração gerada e encaminhada para a impressão", "Gerar Declaração", JOptionPane.INFORMATION_MESSAGE);
+            limparCampos(getContentPane());   
+        }else
+            JOptionPane.showMessageDialog(null, "O campo deve ser preenchido para a declaração ser gerada", "Gerar Declaração", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_botaoGerarDeclaracaoActionPerformed
+
+    private void mesFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mesFieldActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -2134,6 +2541,7 @@ public class UIMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea atestadoMedArea;
     private javax.swing.JTextField atualizaAlergiasField;
     private javax.swing.JLabel atualizaAlergiasLable;
     private javax.swing.JCheckBox atualizaBebidaCheck;
@@ -2153,8 +2561,6 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JLabel atualizaSintomasLable;
     private javax.swing.JPanel atualizarDadosPaciente;
     private javax.swing.JPanel atualizarProntuario;
-    private javax.swing.JButton botaoAcompanhamento;
-    private javax.swing.JButton botaoAtestado;
     private javax.swing.JButton botaoAtualizaProntuario;
     private javax.swing.JButton botaoAtualizarDados;
     private javax.swing.JButton botaoAtualizarDadosPaciente;
@@ -2162,10 +2568,16 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JButton botaoCadastraDados;
     private javax.swing.JButton botaoCadastrarDados;
     private javax.swing.JButton botaoCadastrarProntuario;
-    private javax.swing.JButton botaoClientesMes;
     private javax.swing.JButton botaoDadosPaciente;
+    private javax.swing.JButton botaoGerarAtestado;
+    private javax.swing.JButton botaoGerarDeclaracao;
+    private javax.swing.JButton botaoGerarReceita;
+    private javax.swing.JButton botaoMenuAcompanhamento;
+    private javax.swing.JButton botaoMenuAtestado;
+    private javax.swing.JButton botaoMenuClientesMes;
+    private javax.swing.JButton botaoMenuReceita;
+    private javax.swing.JButton botaoMenuVoltarRelatorios;
     private javax.swing.JButton botaoProntuario;
-    private javax.swing.JButton botaoReceita;
     private javax.swing.JButton botaoRelatorio;
     private javax.swing.JButton botaoRemoverDados;
     private javax.swing.JButton botaoRemoverDadosAdc;
@@ -2175,7 +2587,6 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JButton botaoVoltarDados;
     private javax.swing.JButton botaoVoltarMain;
     private javax.swing.JButton botaoVoltarProntuario;
-    private javax.swing.JButton botaoVoltarRelatorios;
     private javax.swing.JTextField cadastraAlergiaField;
     private javax.swing.JLabel cadastraAlergiaLable;
     private javax.swing.JCheckBox cadastraBebidaCheck;
@@ -2189,25 +2600,41 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JPanel cadastrarProntuario;
     private javax.swing.JPanel cardMenu;
     private javax.swing.JPanel cardOpcoesMedico;
+    private javax.swing.JTextArea declaracaoMedArea;
     private javax.swing.JTextField diagnosticoDoencaField;
     private javax.swing.JLabel diagnosticoDoencaLable;
     private javax.swing.JLabel excluirDadosLable;
     private javax.swing.JLabel excluirProntuarioLable;
+    private javax.swing.JLabel gerarAtestadoLabel;
+    private javax.swing.JPanel gerarAtestadoMed;
+    private javax.swing.JPanel gerarDeclaracaoAcomp;
+    private javax.swing.JLabel gerarDeclaracaoLabel;
+    private javax.swing.JLabel gerarReceitaLabel;
+    private javax.swing.JPanel gerarReceitaMed;
+    private javax.swing.JPanel gerarRelClientesMes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JList<String> listaClientesAtendidos;
     private javax.swing.JList<String> listaDados;
     private javax.swing.JList<String> listaPront;
     private javax.swing.JPanel menuGerenciarDadosPaciente;
     private javax.swing.JPanel menuGerenciarProntuario;
     private javax.swing.JPanel menuGerenciarRelatorios;
     private javax.swing.JPanel menuMedico;
+    private javax.swing.JTextField mesField;
     private javax.swing.JComboBox pacientesBoxAttProntuario;
     private javax.swing.JComboBox pacientesBoxPront;
     private javax.swing.JComboBox pacientesDadosBox;
     private javax.swing.JLabel pacientesLableAttProntuario;
     private javax.swing.JPanel paineSintomas;
+    private javax.swing.JPanel painelAtestadoMedArea;
     private javax.swing.JPanel painelAtualizaAlergias;
     private javax.swing.JPanel painelAtualizaCirurgias;
     private javax.swing.JPanel painelAtualizaDadosCheckBox;
@@ -2216,23 +2643,30 @@ public class UIMedico extends javax.swing.JFrame {
     private javax.swing.JPanel painelAtualizaSintomas;
     private javax.swing.JPanel painelAtualizar;
     private javax.swing.JPanel painelAtualizarProntuario;
+    private javax.swing.JPanel painelBotaoGerarAtestado;
+    private javax.swing.JPanel painelBotaoGerarDeclaracao;
+    private javax.swing.JPanel painelBotaoGerarReceita;
     private javax.swing.JPanel painelCadastraAlergia;
     private javax.swing.JPanel painelCadastraCirurgias;
     private javax.swing.JPanel painelCadastraDados;
     private javax.swing.JPanel painelCadastraDadosCheckBox;
     private javax.swing.JPanel painelDadosPacientes;
+    private javax.swing.JPanel painelDeclaracaoMedArea;
     private javax.swing.JPanel painelDiagnosticoDoenca;
     private javax.swing.JPanel painelExcluirDadosPaciente;
     private javax.swing.JPanel painelExcluirProntuario;
+    private javax.swing.JPanel painelListaClientesAtendidos;
     private javax.swing.JPanel painelPacientesAttProntuario;
     private javax.swing.JPanel painelPacientesProntuario;
     private javax.swing.JPanel painelPrescricaoTratamento;
+    private javax.swing.JPanel painelReceitaMedArea;
     private javax.swing.JPanel painelRemoverDados;
     private javax.swing.JPanel painelRemoverProntuario;
     private javax.swing.JPanel painelSalvarProntuario;
     private javax.swing.JPanel painelSelecionarPacienteDados;
     private javax.swing.JTextField prescricaoTratamentoField;
     private javax.swing.JLabel prescricaoTratamentoLable;
+    private javax.swing.JTextArea receitaMedArea;
     private javax.swing.JPanel removerDadosPaciente;
     private javax.swing.JPanel removerProntuario;
     private javax.swing.JLabel selecionarPacienteDadosLable;
@@ -2249,6 +2683,11 @@ public class UIMedico extends javax.swing.JFrame {
         
         if (painel instanceof JTextField) {
             JTextField ctrl = (JTextField) painel;
+            ctrl.setText("");
+        }
+        
+        if (painel instanceof JTextArea) {
+            JTextArea ctrl = (JTextArea) painel;
             ctrl.setText("");
         }
         
@@ -2269,6 +2708,18 @@ public class UIMedico extends javax.swing.JFrame {
             }
         }
         
+        if(painel instanceof JScrollPane){
+            for (Component entrarScrollPane : ((JScrollPane) painel).getComponents()) {
+                limparCampos(entrarScrollPane);
+            }
+        }
+        
+        if(painel instanceof JViewport){
+            for (Component entrarScrollPane : ((JViewport) painel).getComponents()) {
+                limparCampos(entrarScrollPane);
+            }
+        }
+
         if(painel instanceof JCheckBox){
             for (Component entrarCheckbox : ((JCheckBox) painel).getComponents()){
                 limparCampos(entrarCheckbox);

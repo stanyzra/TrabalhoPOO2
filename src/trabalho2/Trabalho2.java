@@ -14,8 +14,10 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.ArrayList;
 import java.util.Arrays;
+import sistema.GerenciadorMsg;
 import sistema.Medico;
 import sistema.Secretaria;
+import telas.UIGerenciadorMsg;
 import telas.UIMedico;
 import telas.UISecretaria;
 import usuario.TipoUsuario
@@ -40,6 +42,7 @@ public class Trabalho2 extends javax.swing.JFrame {
     //Medico medico = new Medico(pacientes,consultas, dadosAdicionais, prontuario);
     Secretaria secretaria = new Secretaria();
     Medico medico = new Medico();
+    GerenciadorMsg controladorMensagem = new GerenciadorMsg();
     //GerenciadorMensagem gerenciador = new GerenciadorMensagem(pacientes, consultas);
 
     TipoUsuario tipoUsuario = new TipoUsuario();
@@ -61,6 +64,8 @@ public class Trabalho2 extends javax.swing.JFrame {
         usuarioMed = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         usuarioMens.setBackground(new java.awt.Color(204, 204, 204));
         usuarioMens.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -72,6 +77,11 @@ public class Trabalho2 extends javax.swing.JFrame {
         usuarioMens.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/pressed.png"))); // NOI18N
         usuarioMens.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/hover.png"))); // NOI18N
         usuarioMens.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botoes/selected.png"))); // NOI18N
+        usuarioMens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioMensActionPerformed(evt);
+            }
+        });
 
         usuarioSec.setBackground(new java.awt.Color(204, 204, 204));
         usuarioSec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -130,6 +140,7 @@ public class Trabalho2 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuarioSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioSecActionPerformed
@@ -137,7 +148,6 @@ public class Trabalho2 extends javax.swing.JFrame {
         new UISecretaria().setVisible(true);
         this.dispose();
         tipoUsuario.setUsuario(secretaria);
-        
     }//GEN-LAST:event_usuarioSecActionPerformed
 
     private void usuarioMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioMedActionPerformed
@@ -145,6 +155,12 @@ public class Trabalho2 extends javax.swing.JFrame {
         this.dispose();
         tipoUsuario.setUsuario(medico);
     }//GEN-LAST:event_usuarioMedActionPerformed
+
+    private void usuarioMensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioMensActionPerformed
+        new UIGerenciadorMsg().setVisible(true);
+        this.dispose();
+        tipoUsuario.setUsuario(controladorMensagem);
+    }//GEN-LAST:event_usuarioMensActionPerformed
 
     /**
      * @param args the command line arguments

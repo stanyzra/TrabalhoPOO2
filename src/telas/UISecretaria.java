@@ -259,6 +259,7 @@ public class UISecretaria extends javax.swing.JFrame {
         emailCheck = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         cardMenu.setPreferredSize(new java.awt.Dimension(226, 536));
         cardMenu.setLayout(new java.awt.CardLayout());
@@ -354,8 +355,8 @@ public class UISecretaria extends javax.swing.JFrame {
                 .addComponent(botaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addGap(58, 58, 58)
                 .addComponent(botaoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
-                .addGap(52, 52, 52)
-                .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addGap(198, 198, 198)
                 .addGroup(menuSecretariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -453,12 +454,12 @@ public class UISecretaria extends javax.swing.JFrame {
             menuGerenciarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarPacienteLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 60, Short.MAX_VALUE)
-                .addGap(155, 155, 155)
+                .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198)
                 .addGroup(menuGerenciarPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarSec, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
@@ -555,12 +556,12 @@ public class UISecretaria extends javax.swing.JFrame {
             menuGerenciarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarConsultaLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(botaoMenuCadastrarCons, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoMenuAtualizarCons, javax.swing.GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)
-                .addGap(55, 55, 55)
-                .addComponent(botaoMenuRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)
-                .addGap(184, 184, 184)
+                .addComponent(botaoMenuCadastrarCons, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoMenuAtualizarCons, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoMenuRemoverCons, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198)
                 .addGroup(menuGerenciarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarCons, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
@@ -624,9 +625,9 @@ public class UISecretaria extends javax.swing.JFrame {
         menuGerenciarRelLayout.setVerticalGroup(
             menuGerenciarRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuGerenciarRelLayout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(botaoMenuEmitirRelCons, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
+                .addComponent(botaoMenuEmitirRelCons, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(402, 402, 402)
                 .addGroup(menuGerenciarRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoVoltarRel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32))
@@ -2371,9 +2372,7 @@ public class UISecretaria extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -2403,7 +2402,6 @@ public class UISecretaria extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_botaoVoltarSecvoltarMenuPrincipal
 
-    
     public void atualizarComboBoxPacientes(){
         limparCampos(getContentPane());
         pacientes = sec.consultarPacientes();
@@ -2422,7 +2420,6 @@ public class UISecretaria extends javax.swing.JFrame {
     
     private void botaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarActionPerformed
         atualizarComboBoxPacientes();
-        
     }//GEN-LAST:event_botaoAtualizarActionPerformed
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
@@ -2683,7 +2680,7 @@ public class UISecretaria extends javax.swing.JFrame {
             consultas.forEach(itens -> {
                 consBox.addItem(itens.getPaciente().getNome());
             });     
-            atualizarCamposAlteracao();
+            //atualizarCamposAlteracao();
         }
     }
     
@@ -2832,11 +2829,11 @@ public class UISecretaria extends javax.swing.JFrame {
             (dataSelecionada.get(Calendar.MONTH)+1),
             dataSelecionada.get(Calendar.DAY_OF_MONTH)));
 
-    dadosAtualizados.setIdPaciente(pacientes.get(pacientesBox.getSelectedIndex()).getIdPaciente());
+        dadosAtualizados.setIdPaciente(pacientes.get(pacientesBox.getSelectedIndex()).getIdPaciente());
 
-    if (pacientes.get(pacientesBox.getSelectedIndex()).getConsulta() != null) {
-        dadosAtualizados.setConsulta(pacientes.get(pacientesBox.getSelectedIndex()).getConsulta());
-        dadosAtualizados.setConsultaCadastrada(true);
+        if (pacientes.get(pacientesBox.getSelectedIndex()).getConsulta() != null) {
+            dadosAtualizados.setConsulta(pacientes.get(pacientesBox.getSelectedIndex()).getConsulta());
+            dadosAtualizados.setConsultaCadastrada(true);
         }
 
         sec.atualizarPaciente(dadosAtualizados);
@@ -2872,6 +2869,7 @@ public class UISecretaria extends javax.swing.JFrame {
         pacienteNovo.setCidade(cidadeField.getText());
         pacienteNovo.setRua(ruaField.getText());
         pacienteNovo.setEmail(emailField.getText());
+        
         if (telField.getText().equals(""))
             pacienteNovo.setTelefone(0);
         else
@@ -2879,10 +2877,11 @@ public class UISecretaria extends javax.swing.JFrame {
         pacienteNovo.setLocalDateNasc(LocalDate.of(dataSelecionada.get(Calendar.YEAR),
             (dataSelecionada.get(Calendar.MONTH)+1),
             dataSelecionada.get(Calendar.DAY_OF_MONTH)));
-    pacienteNovo.setTipoPlano(grupoConvenio.getSelection().getActionCommand());
-    sec.cadastrarPaciente(pacienteNovo);
-    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
-    limparCampos(getContentPane());
+        
+        pacienteNovo.setTipoPlano(grupoConvenio.getSelection().getActionCommand());
+        sec.cadastrarPaciente(pacienteNovo);
+        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+        limparCampos(getContentPane());
 
     }//GEN-LAST:event_botaoSalvarDadosActionPerformed
 
